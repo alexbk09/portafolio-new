@@ -4,7 +4,44 @@ import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight, Check, Code2, Globe2, Mail, Menu, Send, X } from 'lucide-react'
 
-const stack = ['React', 'Next.js', 'Node.js', 'Laravel', 'PHP', 'Supabase', 'PostgreSQL', 'TypeScript']
+const skills = [
+  { name: 'HTML/CSS', category: 'Frontend', color: 'orange' },
+  { name: 'JavaScript', category: 'Frontend', color: 'yellow' },
+  { name: 'React', category: 'Frontend', color: 'blue' },
+  { name: 'Next.js', category: 'Frontend', color: 'blue' },
+  { name: 'Vue.js', category: 'Frontend', color: 'green' },
+  { name: 'Angular', category: 'Frontend', color: 'red' },
+  { name: 'AngularJS', category: 'Frontend', color: 'red' },
+  { name: 'Bootstrap', category: 'Frontend', color: 'purple' },
+  { name: 'Tailwind', category: 'Frontend', color: 'blue' },
+  { name: 'Material UI', category: 'Frontend', color: 'green' },
+  { name: 'TypeScript', category: 'Frontend', color: 'blue' },
+  { name: 'PHP/Laravel', category: 'Backend', color: 'purple' },
+  { name: 'Node.js', category: 'Backend', color: 'green' },
+  { name: 'Python', category: 'Backend', color: 'blue' },
+  { name: 'MySQL/PostgreSQL', category: 'Backend', color: 'blue' },
+  { name: 'CodeIgniter', category: 'Backend', color: 'green' },
+  { name: 'Supabase', category: 'Backend', color: 'green' },
+  { name: 'Git', category: 'Herramientas', color: 'red' },
+  { name: 'Docker', category: 'Herramientas', color: 'blue' },
+  { name: 'AWS', category: 'Herramientas', color: 'orange' },
+  { name: 'Linux', category: 'Herramientas', color: 'yellow' },
+  { name: 'WordPress', category: 'Herramientas', color: 'blue' },
+  { name: 'Postman', category: 'Herramientas', color: 'orange' },
+  { name: 'Figma', category: 'Herramientas', color: 'green' },
+  { name: 'Cursor', category: 'Herramientas', color: 'gray' },
+  { name: 'VSCode', category: 'Herramientas', color: 'blue' },
+  { name: 'Google', category: 'Herramientas', color: 'red' },
+  { name: 'PayPal', category: 'Herramientas', color: 'blue' },
+  { name: 'Stripe', category: 'Herramientas', color: 'green' },
+  { name: 'Shopify', category: 'Herramientas', color: 'purple' },
+  { name: 'Jira', category: 'Herramientas', color: 'red' },
+  { name: 'WhatsApp', category: 'Herramientas', color: 'green' },
+  { name: 'Slack', category: 'Herramientas', color: 'blue' },
+  { name: 'Trello', category: 'Herramientas', color: 'red' },
+  { name: 'Notion', category: 'Herramientas', color: 'gray' },
+  { name: 'JWT', category: 'Herramientas', color: 'gray' },
+]
 
 const projects = [
   { mainImage: 'images/aytec.png', title: 'Aytec plataforma médica', description: 'Plataforma médica para crear historias, órdenes y gestionar pacientes, con módulos de administración, reportes, roles y permisos de usuarios.', technologies: 'Laravel, Vue.js, MySQL, Bootstrap, Firebase, JWT', url: '', githubUrl: '', accent: 'cyan' },
@@ -55,7 +92,7 @@ export default function Home() {
       <Reveal delay={0.18} className="hero-aside"><div className="code-window"><div className="window-bar"><span /><span /><span /><small>desarrollador.config.ts</small></div><pre><code><i>const</i> <b>desarrollador</b> = {'{'}{`\n`}  nombre: <em>&quot;Tu nombre&quot;</em>,{`\n`}  enfoque: [<em>&quot;producto&quot;</em>, <em>&quot;sistemas&quot;</em>],{`\n`}  experiencia: <strong>7</strong>,{`\n`}  estado: <em>&quot;construyendo&quot;</em>{`\n`}{'}'}</code></pre><div className="code-footer"><span><span className="status-dot" /> abierto a buenos retos</span><span>⌘ K</span></div></div></Reveal>
     </section>
 
-    <section className="stack-strip section-shell" aria-label="Tecnologías"><p className="eyebrow">Tecnologías que utilizo</p><div className="stack-list">{stack.map((item, index) => <span key={item}><span className="stack-index">0{index + 1}</span>{item}</span>)}</div></section>
+    <section className="skills-section section-shell" aria-labelledby="skills-title"><Reveal><SectionLabel eyebrow="Stack / Herramientas" title="Las herramientas detrás de cada entrega." copy="Un stack amplio para moverme con soltura desde la interfaz hasta la infraestructura y la operación." /></Reveal><div className="skills-board">{['Frontend', 'Backend', 'Herramientas'].map(category => <div className="skill-group" key={category}><div className="skill-group-heading"><span className="skill-group-dot" />{category}<span className="skill-group-count">{skills.filter(skill => skill.category === category).length.toString().padStart(2, '0')}</span></div><div className="skills-grid">{skills.filter(skill => skill.category === category).map((skill, index) => <motion.div key={skill.name} className={`skill-chip ${skill.color}`} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.025 }}><span className="skill-mark">{skill.name.slice(0, 1)}</span><span>{skill.name}</span></motion.div>)}</div></div>)}</div></section>
 
     <section id="work" className="section-shell content-section"><Reveal><SectionLabel eyebrow="01 / Proyectos seleccionados" title="Una selección de lo que he creado." copy="Sistemas reales donde la ingeniería cuidadosa se convirtió en resultados medibles." /></Reveal><div className="projects-grid">{projects.map((project, index) => <Reveal key={project.title} delay={(index % 3) * 0.08}><article className={`project-card ${project.accent}`}><div className="project-visual"><div className="visual-lines" /><span className="visual-label">{project.mainImage} / 0{index + 1}</span><div className="visual-symbol">{index % 3 === 0 ? <Globe2 /> : index % 3 === 1 ? <Code2 /> : <span className="ledger-symbol">∑</span>}</div></div><div className="project-content"><div className="project-topline"><span className="eyebrow">Proyecto</span><span className="project-arrow">↗</span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tag-list">{project.technologies.split(',').map(tag => <span key={tag}>{tag.trim()}</span>)}</div>{(project.url || project.githubUrl) && <div className="project-links">{project.url && <a href={project.url} target="_blank" rel="noreferrer">Demo en vivo <ArrowUpRight size={14} /></a>}{project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer"><Code2 size={14} /> GitHub</a>}</div>}</div></article></Reveal>)}</div></section>
 
