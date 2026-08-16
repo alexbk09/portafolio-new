@@ -7,8 +7,8 @@ const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', display
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains', display: 'swap' })
 
 export const metadata: Metadata = {
-  title: 'Alex Morgan — Senior Fullstack Engineer',
-  description: 'Portfolio of Alex Morgan, a senior fullstack engineer building fast, reliable digital products with React, Node.js, PHP, and Laravel.',
+  title: 'Keiber Paez — Senior Full Stack Developer',
+  description: 'Portafolio de Keiber Alexander Paez Hernández, Senior Full Stack Developer y Technical Lead especializado en Laravel, Node.js, React, Vue.js y arquitecturas robustas.',
   generator: 'v0.app',
 }
 
@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${jetbrainsMono.variable}`}>
+    <html lang="es" className={`${dmSans.variable} ${jetbrainsMono.variable}`}>
       <body className="antialiased">{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body>
     </html>
   )
