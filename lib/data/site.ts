@@ -70,8 +70,8 @@ export const smtpConfig = {
   host: process.env.SMTP_HOST || 'smtp.gmail.com',
   /** Puerto SMTP (587/TLS o 465/SSL) */
   port: Number(process.env.SMTP_PORT) || 587,
-  /** true para 465 SSL, false para 587 STARTTLS */
-  secure: false,
+  /** true para 465 SSL, false para 587 STARTTLS. Detecta automáticamente si el puerto es 465 o se fuerza con SMTP_SECURE=true */
+  secure: process.env.SMTP_SECURE === 'true' || Number(process.env.SMTP_PORT) === 465,
   /** Usuario: el correo que envía los mensajes */
   user: process.env.SMTP_USER || 'alexbk09@gmail.com',
   /** Contraseña o App Password del correo emisor */
