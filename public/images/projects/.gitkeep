@@ -1,0 +1,4 @@
+# Carpeta de imágenes de proyectos
+# Sube aquí las imágenes de cada sistema.
+# Nombre recomendado: nombre-del-sistema.jpg (ej: akimax-pet.jpg, dantojos.jpg)
+# Luego referencia la imagen en lib/data/projects.ts con: /images/projects/akimax-pet.jpg

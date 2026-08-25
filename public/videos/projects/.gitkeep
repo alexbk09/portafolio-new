@@ -1,0 +1,4 @@
+# Carpeta de videos de proyectos
+# Sube aquí los videos/demos de cada sistema.
+# Nombre recomendado: nombre-del-sistema.mp4 (ej: akimax-pet.mp4, dantojos.mp4)
+# Luego referencia el video en lib/data/projects.ts con: /videos/projects/akimax-pet.mp4
