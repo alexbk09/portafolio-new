@@ -113,7 +113,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   <div className="modal-image-fallback">
                     <span className="modal-image-symbol">{project.fallbackVisual.slice(0, 1)}</span>
                     <span className="modal-image-label">{project.fallbackVisual}</span>
-                    <small>Sube una imagen a <code>public/images/projects/{project.id}.jpg</code></small>
+                    <small>Sistema {project.isOpenSource ? 'open source' : 'bajo contrato'} · demo disponible en el footer</small>
                   </div>
                 )}
                 {project.videoUrl && (

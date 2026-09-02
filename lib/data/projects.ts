@@ -68,7 +68,6 @@ export const projects: Project[] = [
     technologies: 'Next.js, TypeScript, Tailwind, React',
     url: 'https://sales-delta-rouge.vercel.app/',
     githubUrl: 'https://github.com/alexbk09/sales',
-    videoUrl: '/videos/projects/',
     galleryImages: [
       '/images/projects/ilumax/Screenshot 2026-08-27 143641.png',
       '/images/projects/ilumax/Screenshot 2026-08-27 143700.png',
@@ -202,7 +201,7 @@ export const projects: Project[] = [
     title: 'Ilumax',
     description: 'Plataforma tienda construida con React.js, TypeScript y Supabase mostrando productos, precios en dos monedas consumiendo una API y carrito de compra con parte administrativa para manejar productos, solicitudes y dashboard de información.',
     longDescription: 'Ilumax es una tienda de iluminación con catálogo en vivo, precios duales sincronizados por API, carrito persistente y panel administrativo completo. El administrador gestiona productos, aprueba solicitudes y visualiza métricas de ventas e inventario en un dashboard en tiempo real.',
-    mainImage: '/images/projects/ilumax.jpg',
+    mainImage: '/images/projects/ilumax/fullscreen.png',
     fallbackVisual: 'Ilumax',
     technologies: 'Supabase, TypeScript, Tailwind, React',
     url: 'https://ilumax.vercel.app/',

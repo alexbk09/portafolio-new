@@ -16,6 +16,14 @@ interface ContactFormProps {
 /** Estado del envío del formulario */
 type SubmitStatus = 'idle' | 'sending' | 'success' | 'error'
 
+/** Tipos de consulta para pre-clasificar los mensajes */
+const inquiryTypes = [
+  { value: 'freelance', label: 'Proyecto freelance / B2B' },
+  { value: 'empleo', label: 'Oportunidad de empleo remoto' },
+  { value: 'consultoria', label: 'Consultoría / Optimización' },
+  { value: 'otro', label: 'Otro' },
+]
+
 export default function ContactForm({ className = '' }: ContactFormProps) {
   const [status, setStatus] = useState<SubmitStatus>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -108,6 +116,23 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
             aria-hidden="true"
           />
 
+          {/* Tipo de consulta: pre-clasifica el mensaje */}
+          <label>
+            ¿Qué necesitas?
+            <select
+              name="inquiryType"
+              required
+              defaultValue="freelance"
+              disabled={status === 'sending'}
+            >
+              {inquiryTypes.map((type) => (
+                <option key={type.value} value={type.value}>
+                  {type.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
           <label>
             Nombre
             <input required name="name" placeholder="Tu nombre" disabled={status === 'sending'} />
@@ -129,7 +154,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
             <textarea
               required
               name="message"
-              placeholder="¿En qué estás trabajando?"
+              placeholder="Cuéntame en qué estás trabajando…"
               rows={4}
               disabled={status === 'sending'}
             />

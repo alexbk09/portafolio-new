@@ -4,7 +4,7 @@
  */
 
 /** Categorías de habilidades técnicas */
-export type SkillCategory = 'Frontend' | 'Backend' | 'Herramientas' | 'IA'
+export type SkillCategory = 'Frontend' | 'Backend' | 'Arquitectura & DevOps' | 'Integraciones & APIs'
 
 /** Colores de acento disponibles para chips y tarjetas */
 export type AccentColor = 'violet' | 'lime' | 'cyan' | 'orange' | 'yellow' | 'blue' | 'green' | 'red' | 'purple' | 'gray'

@@ -16,6 +16,14 @@ import { smtpConfig, siteConfig } from '@/lib/data/site'
 /** Máximo de caracteres permitido para cada campo */
 const MAX_FIELD_LENGTH = 500
 
+/** Etiquetas legibles para los tipos de consulta pre-clasificados */
+const INQUIRY_LABELS: Record<string, string> = {
+  freelance: 'Proyecto freelance / B2B',
+  empleo: 'Oportunidad de empleo remoto',
+  consultoria: 'Consultoría / Optimización',
+  otro: 'Otro',
+}
+
 /** Valida que un campo de texto sea válido */
 function isValidField(value: FormDataEntryValue | null, maxLength = MAX_FIELD_LENGTH): value is string {
   if (typeof value !== 'string') return false
@@ -52,6 +60,8 @@ export async function POST(request: NextRequest) {
     const name = formData.get('name')
     const email = formData.get('email')
     const message = formData.get('message')
+    const inquiryRaw = formData.get('inquiryType')
+    const inquiryType = typeof inquiryRaw === 'string' ? inquiryRaw : 'otro'
 
     if (!isValidField(name) || !isValidField(email) || !isValidField(message)) {
       return NextResponse.json({ success: false, error: 'Por favor completa todos los campos correctamente.' }, { status: 400 })
@@ -76,7 +86,7 @@ export async function POST(request: NextRequest) {
       to: siteConfig.contactEmail,
       replyTo: email,
       subject: `Nuevo mensaje del portafolio — ${name.trim()}`,
-      text: `Nombre: ${name.trim()}\nCorreo: ${email.trim()}\n\nMensaje:\n${message.trim()}`,
+      text: `Nombre: ${name.trim()}\nCorreo: ${email.trim()}\nTipo de consulta: ${INQUIRY_LABELS[inquiryType] ?? inquiryType}\n\nMensaje:\n${message.trim()}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #f7f7f7; border-radius: 8px;">
           <h2 style="color: #111; margin-top: 0;">Nuevo mensaje de contacto</h2>
@@ -88,6 +98,10 @@ export async function POST(request: NextRequest) {
             <tr>
               <td style="padding: 10px 16px; font-weight: bold; border-bottom: 1px solid #eee;">Correo</td>
               <td style="padding: 10px 16px; border-bottom: 1px solid #eee;"><a href="mailto:${email.trim()}">${email.trim()}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 16px; font-weight: bold; border-bottom: 1px solid #eee;">Tipo de consulta</td>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #eee;"><strong>${INQUIRY_LABELS[inquiryType] ?? inquiryType}</strong></td>
             </tr>
             <tr>
               <td style="padding: 10px 16px; font-weight: bold;">Mensaje</td>

@@ -3,8 +3,9 @@
  */
 'use client'
 
-import { ArrowUpRight, Code2, Eye, Globe2 } from 'lucide-react'
+import { ArrowUpRight, Code2, Eye } from 'lucide-react'
 import type { Project } from '@/lib/types/portfolio'
+import ProjectVisual from '@/components/molecules/ProjectVisual'
 
 interface ProjectCardProps {
   /** Proyecto a mostrar */
@@ -18,16 +19,8 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, index, onOpenDetails }: ProjectCardProps) {
   return (
     <article className={`project-card ${project.accent}`}>
-      {/* Visual superior */}
-      <div className="project-visual">
-        <div className="visual-lines" />
-        <span className="visual-label">
-          {project.fallbackVisual} / 0{index + 1}
-        </span>
-        <div className="visual-symbol">
-          {index % 3 === 0 ? <Globe2 /> : index % 3 === 1 ? <Code2 /> : <span className="ledger-symbol">∑</span>}
-        </div>
-      </div>
+      {/* Visual superior: imagen real con fallback elegante */}
+      <ProjectVisual project={project} index={index} />
 
       {/* Contenido */}
       <div className="project-content">

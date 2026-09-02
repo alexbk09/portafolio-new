@@ -9,10 +9,26 @@ export const siteConfig = {
   fullName: 'Keiber Alexander Paez Hernández',
   /** Título profesional */
   title: 'Senior Full Stack Developer',
+  /** Propuesta de valor principal (H1 del hero) */
+  headline: 'Senior Full Stack Developer',
+  /** Propuesta de valor secundaria (stack + sectores) */
+  headlineAccent: 'Laravel · Node.js · React · Vue',
   /** Descripción corta para SEO y hero */
   bio: 'Soy Keiber Alexander Paez Hernández, Ingeniero de Software y Senior Full Stack Developer con más de 7 años convirtiendo requisitos complejos en software rápido, confiable y humano. Trabajo con PHP/Laravel, Node.js, React y Vue.js.',
+  /** Frase corta de posicionamiento orientada a negocios */
+  positioning:
+    'Construyo sistemas que generan dinero o ahorran tiempo a negocios reales: e-commerce con doble moneda, clínicas sin citas perdidas, facturación electrónica sin rechazos.',
   /** Estado de disponibilidad */
-  availability: 'Disponible para contratación B2B · Remoto · 2026',
+  availability: 'Disponible · Remoto Global · Respuesta < 24h',
+  /** Personas a las que está abierto (contratación) */
+  openTo: 'Empleo remoto (Senior Full Stack / Tech Lead) · Proyectos freelance B2B · Consultoría',
+  /** Métricas destacadas del hero */
+  metrics: [
+    { value: '7+', label: 'años de experiencia' },
+    { value: '15+', label: 'sistemas en producción' },
+    { value: '5+', label: 'sectores atendidos' },
+    { value: '100%', label: 'remoto · LATAM & Global' },
+  ],
   /** Enlaces sociales */
   socials: {
     github: 'https://github.com/alexbk09',
@@ -23,12 +39,14 @@ export const siteConfig = {
   contactEmail: 'alexbk09@hotmail.com',
   /** Años de experiencia (mostrado en el hero) */
   yearsOfExperience: 7,
+  /** Conteo de proyectos publicados en el portafolio (se actualiza en projects.ts) */
+  projectCount: 16,
   /** Configuración de WhatsApp para contactar */
   whatsapp: {
     /** Número con código de país en formato internacional */
     phone: '+584122649707',
     /** Mensaje por defecto para el botón flotante */
-    defaultMessage: 'Hola Keiber, vi tu portafolio y me gustaría conversar contigo.',
+    defaultMessage: 'Hola Keiber, vi tu portafolio y me gustaría conversar contigo sobre una oportunidad.',
   },
 } as const
 
