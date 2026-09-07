@@ -1,12 +1,11 @@
 /**
- * Página principal del portafolio.
- * Orden pensado para conversión:
- * Hero (quién eres) → Métricas (resultados reales) → Servicios (cómo ayudas como freelance)
- * → Empleo (cómo ayudas como equipo) → Proyectos (evidencia) → Experiencia → Stack → Contacto.
+ * Página principal del portafolio (home).
+ * El header y footer globales viven ahora en el layout raíz, por lo que
+ * esta página solo contiene las secciones de contenido. La sección de
+ * descarga de CV está en DownloadSection (exclusiva de la home).
  */
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import SiteHeader from '@/components/organisms/SiteHeader'
 import Hero from '@/components/organisms/Hero'
 import ImpactSection from '@/components/organisms/ImpactSection'
 import ServicesSection from '@/components/organisms/ServicesSection'
@@ -14,13 +13,12 @@ import HireMeSection from '@/components/organisms/HireMeSection'
 import ProjectsSection from '@/components/organisms/ProjectsSection'
 import ExperienceSection from '@/components/organisms/ExperienceSection'
 import SkillsSection from '@/components/organisms/SkillsSection'
+import DownloadSection from '@/components/organisms/DownloadSection'
 import ContactSection from '@/components/organisms/ContactSection'
-import SiteFooter from '@/components/organisms/SiteFooter'
 import JsonLd from '@/components/atoms/JsonLd'
 import { projects } from '@/lib/data/projects'
 import { siteConfig } from '@/lib/data/site'
-import { softwareProjectsJsonLd, SITE_URL } from '@/lib/config/seo'
-import { breadcrumbJsonLd } from '@/lib/config/seo'
+import { softwareProjectsJsonLd, SITE_URL, breadcrumbJsonLd } from '@/lib/config/seo'
 
 /* Metadata específica de la home. El layout raíz aporta el resto (OG/Twitter global). */
 export const metadata: Metadata = {
@@ -45,9 +43,6 @@ export default function Home() {
     <main>
       {/* Fondo de cuadrícula ambiental */}
       <div className="ambient-grid" aria-hidden="true" />
-
-      {/* Header navegación */}
-      <SiteHeader />
 
       {/* Hero → propuesta de valor + métricas clave */}
       <Hero />
@@ -87,11 +82,11 @@ export default function Home() {
       {/* Experiencia */}
       <ExperienceSection />
 
+      {/* Descarga de CV (solo home; footer global en el layout) */}
+      <DownloadSection />
+
       {/* Contacto con formulario SMTP */}
       <ContactSection />
-
-      {/* Footer con descarga de CV */}
-      <SiteFooter />
 
       {/* Datos estructurados: lista de software construido + breadcrumb */}
       <JsonLd data={softwareProjectsJsonLd(projects)} />

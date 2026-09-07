@@ -13,6 +13,8 @@ import type { Metadata, Viewport } from 'next'
 import { DM_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import WhatsAppFloatButton from '@/components/atoms/WhatsAppFloatButton'
+import SiteHeader from '@/components/organisms/SiteHeader'
+import SiteFooter from '@/components/organisms/SiteFooter'
 import JsonLd from '@/components/atoms/JsonLd'
 import {
   absoluteUrl,
@@ -124,7 +126,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es" className={`${dmSans.variable} ${jetbrainsMono.variable}`}>
       <body className="antialiased">
+        <SiteHeader />
         {children}
+        <SiteFooter />
         {/* Datos estructurados estáticos: Person + Organization + WebSite + ProfilePage + Services */}
         <JsonLd data={personJsonLd()} />
         <JsonLd data={organizationJsonLd()} />
