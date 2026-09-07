@@ -4,8 +4,10 @@
 'use client'
 
 import { ArrowUpRight, Code2, Eye } from 'lucide-react'
+import Link from 'next/link'
 import type { Project } from '@/lib/types/portfolio'
 import ProjectVisual from '@/components/molecules/ProjectVisual'
+import { PROJECT_ROUTE } from '@/lib/config/seo'
 
 interface ProjectCardProps {
   /** Proyecto a mostrar */
@@ -54,15 +56,24 @@ export default function ProjectCard({ project, index, onOpenDetails }: ProjectCa
           </div>
         )}
 
-        {/* Botón de detalles */}
-        <button
-          type="button"
-          className="project-details-button"
-          onClick={() => onOpenDetails(project)}
-          aria-label={`Ver detalles de ${project.title}`}
-        >
-          <Eye size={14} /> Ver detalles del sistema
-        </button>
+        {/* Enlaces de acción: ver más inline o página completa indexable */}
+        <div className="project-details-row">
+          <button
+            type="button"
+            className="project-details-button"
+            onClick={() => onOpenDetails(project)}
+            aria-label={`Ver detalles de ${project.title}`}
+          >
+            <Eye size={14} /> Ver resumen
+          </button>
+          <Link
+            href={PROJECT_ROUTE(project.id)}
+            className="project-details-link"
+            aria-label={`Ver caso de estudio completo de ${project.title}`}
+          >
+            Caso indexable <ArrowUpRight size={13} />
+          </Link>
+        </div>
       </div>
     </article>
   )

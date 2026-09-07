@@ -24,9 +24,11 @@ import {
   Wrench,
   X,
 } from 'lucide-react'
+import Link from 'next/link'
 import type { Project } from '@/lib/types/portfolio'
 import { siteConfig, buildWhatsAppLink } from '@/lib/data/site'
 import WhatsAppIcon from '@/components/atoms/WhatsAppIcon'
+import { PROJECT_ROUTE } from '@/lib/config/seo'
 
 interface ProjectModalProps {
   /** Proyecto a mostrar en detalle */
@@ -223,6 +225,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     <Code2 size={14} /> GitHub
                   </a>
                 )}
+                <Link href={PROJECT_ROUTE(project.id)} onClick={onClose} className="button button-ghost">
+                  Caso de estudio completo <ExternalLink size={14} />
+                </Link>
                 <a href="#contact" onClick={onClose} className="button button-ghost">
                   Contratar algo similar <ExternalLink size={14} />
                 </a>

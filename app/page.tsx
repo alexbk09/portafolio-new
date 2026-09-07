@@ -5,6 +5,7 @@
  * → Empleo (cómo ayudas como equipo) → Proyectos (evidencia) → Experiencia → Stack → Contacto.
  */
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import SiteHeader from '@/components/organisms/SiteHeader'
 import Hero from '@/components/organisms/Hero'
 import ImpactSection from '@/components/organisms/ImpactSection'
@@ -19,6 +20,7 @@ import JsonLd from '@/components/atoms/JsonLd'
 import { projects } from '@/lib/data/projects'
 import { siteConfig } from '@/lib/data/site'
 import { softwareProjectsJsonLd, SITE_URL } from '@/lib/config/seo'
+import { breadcrumbJsonLd } from '@/lib/config/seo'
 
 /* Metadata específica de la home. El layout raíz aporta el resto (OG/Twitter global). */
 export const metadata: Metadata = {
@@ -28,9 +30,13 @@ export const metadata: Metadata = {
     title: 'Keiber Paez | Senior Full Stack Developer — Laravel, Node.js, React y Vue',
     description: siteConfig.positioning,
     url: SITE_URL,
+    type: 'website',
   },
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      'es-ES': SITE_URL,
+    },
   },
 }
 
@@ -61,6 +67,23 @@ export default function Home() {
       {/* Proyectos con modal de detalle */}
       <ProjectsSection />
 
+      {/* CTA hacia índice indexable de proyectos */}
+      <section className="section-shell content-section include-cta" aria-label="Ver todos los proyectos">
+        <div className="download-panel">
+          <div>
+            <p className="eyebrow">Casos de estudio indexables</p>
+            <h2 className="include-title">Cada sistema con su página de caso</h2>
+            <p className="section-copy">
+              Explora el problema, la solución, el stack y los resultados medibles de cada sistema
+              en una página dedicada, pensada para reclutadores, clientes y buscadores.
+            </p>
+          </div>
+          <Link href="/proyectos" className="button button-primary include-cta-button">
+            Ver los 16 casos de estudio →
+          </Link>
+        </div>
+      </section>
+
       {/* Experiencia */}
       <ExperienceSection />
 
@@ -70,8 +93,9 @@ export default function Home() {
       {/* Footer con descarga de CV */}
       <SiteFooter />
 
-      {/* Datos estructurados: lista de software construido (rich results) */}
+      {/* Datos estructurados: lista de software construido + breadcrumb */}
       <JsonLd data={softwareProjectsJsonLd(projects)} />
+      <JsonLd data={breadcrumbJsonLd([{ name: 'Inicio', path: '/' }])} />
     </main>
   )
 }

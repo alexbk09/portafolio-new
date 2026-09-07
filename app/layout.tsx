@@ -20,8 +20,10 @@ import {
   DEFAULT_LOCALE,
   GOOGLE_SITE_VERIFICATION,
   META_DESCRIPTION,
+  organizationJsonLd,
   personJsonLd,
   profilePageJsonLd,
+  servicesJsonLd,
   SITE_NAME,
   SITE_URL,
   webSiteJsonLd,
@@ -123,10 +125,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="es" className={`${dmSans.variable} ${jetbrainsMono.variable}`}>
       <body className="antialiased">
         {children}
-        {/* Datos estructurados estáticos: Person + WebSite + ProfilePage */}
+        {/* Datos estructurados estáticos: Person + Organization + WebSite + ProfilePage + Services */}
         <JsonLd data={personJsonLd()} />
+        <JsonLd data={organizationJsonLd()} />
         <JsonLd data={webSiteJsonLd()} />
         <JsonLd data={profilePageJsonLd()} />
+        <JsonLd data={servicesJsonLd()} />
         {process.env.NODE_ENV === 'production' && <Analytics />}
         <WhatsAppFloatButton />
       </body>

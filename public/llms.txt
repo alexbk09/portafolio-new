@@ -1,0 +1,46 @@
+# Keiber Paez | Senior Full Stack Developer
+
+> Portafolio profesional. Disponible remoto global para empleo senior, proyectos freelance B2B y consultoría. Respuesta en +24h.
+
+## Quién soy
+
+Keiber Alexander Paez Hernández, Ingeniero de Software y Senior Full Stack Developer con +7 años. PHP/Laravel, Node.js, React y Vue.js construyendo e-commerce, SaaS, plataformas médicas y facturación electrónica en producción LATAM/Global.
+
+## Stack principal
+
+Laravel/PHP · Node.js · React · Next.js · Vue.js · Angular · TypeScript · Tailwind CSS · MySQL · PostgreSQL · MongoDB · Supabase · Redis · Docker · AWS (S3/Lambda) · APIs SOAP/REST · Pasarelas de pago · JWT Auth
+
+## Servicios
+
+1. Desarrollo de productos digitales (e-commerce, SaaS, agendamiento, paneles) — 4-10 semanas.
+2. Optimización de sistemas existentes (rendimiento, bugs, modernización, cache).
+3. Senior remoto para tu equipo (code reviews, arquitectura, mentoría, B2B mensual).
+4. Consultoría de producto y arquitectura (viabilidad, stack, roadmap).
+
+## Casos de estudio indexables
+
+- https://portafolio-new-jet.vercel.app/proyectos/portafolio — Portafolio Next.js 16.
+- https://portafolio-new-jet.vercel.app/proyectos/services — Agendamiento React + Supabase.
+- https://portafolio-new-jet.vercel.app/proyectos/amaxtech-sales — Landing Ilumax SaaS.
+- https://portafolio-new-jet.vercel.app/proyectos/akimax-pet — Veterinaria precios duales.
+- https://portafolio-new-jet.vercel.app/proyectos/dantojos — Pastelería configurador WhatsApp.
+- https://portafolio-new-jet.vercel.app/proyectos/ilumax — Tienda Supabase panel admin.
+- https://portafolio-new-jet.vercel.app/proyectos/ecommerce — Laravel + React CRM/facturación.
+- https://portafolio-new-jet.vercel.app/proyectos/portafolio-laravel — Laravel + IA FastAPI.
+- https://portafolio-new-jet.vercel.app/proyectos/aytec — Médica Laravel + Vue roles.
+- https://portafolio-new-jet.vercel.app/proyectos/triangle — Bolsa empleo Angular + Node.
+- https://portafolio-new-jet.vercel.app/proyectos/safe-clinic — Clínica SOAP Laravel + React.
+- https://portafolio-new-jet.vercel.app/proyectos/audit-salud — RIPS JSON + Redis.
+- https://portafolio-new-jet.vercel.app/proyectos/core360 — Intranet Vue + Laravel.
+- https://portafolio-new-jet.vercel.app/proyectos/pet-clinic — Veterinaria Google Calendar.
+- https://portafolio-new-jet.vercel.app/proyectos/pago-facturas — Facturación S3 + Lambda.
+- https://portafolio-new-jet.vercel.app/proyectos/geo-referencia — Geolocalización Maps.
+- https://portafolio-new-jet.vercel.app/proyectos/habilitacion — Encuestas Wompi.
+
+## Contacto
+
+Web: https://portafolio-new-jet.vercel.app · Email: alexbk09@hotmail.com · GitHub: https://github.com/alexbk09 · LinkedIn: https://linkedin.com/in/keiber-paez-fullstack · WhatsApp: +584122649707
+
+## Disponibilidad
+
+Remoto Global · B2B, empleo senior y consultoría activas.
