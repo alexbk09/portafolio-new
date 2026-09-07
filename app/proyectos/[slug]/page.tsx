@@ -42,9 +42,17 @@ export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.id }))
 }
 
-/** Metadata dinámica y canónica única por caso de estudio */
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const project = projects.find((p) => p.id === params.slug)
+/**
+ * Metadata dinámica y canónica única por caso de estudio.
+ * En Next.js 16 params es una Promise y debe resolverse con await.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const project = projects.find((p) => p.id === slug)
   if (!project) return {}
   const url = absoluteUrl(PROJECT_ROUTE(project.id))
 
@@ -266,8 +274,17 @@ function ProjectDetailPage({ project }: { project: Project }) {
   )
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.id === params.slug)
+/**
+ * Página SSG de detalle. En Next.js 16 params viene como Promise.
+ * Se resuelve con await antes de buscar el proyecto.
+ */
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const project = projects.find((p) => p.id === slug)
   if (!project) notFound()
 
   return (
