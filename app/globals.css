@@ -342,4 +342,203 @@ code i { color: #ca91ff; font-style: normal; } code b { color: #80dbff; font-wei
   .include-cta { padding-top: 70px; }
 }
 
+/* ── Badge "IA integrada" en la tarjeta del proyecto ────── */
+.project-ai-badge {
+  z-index: 2;
+  position: absolute;
+  top: 44px;
+  right: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid rgba(183,243,107,.5);
+  border-radius: 14px;
+  color: #d9ffb3;
+  background: rgba(12,18,8,.88);
+  font: 9px var(--font-mono);
+  letter-spacing: .02em;
+  box-shadow: 0 0 22px rgba(183,243,107,.28);
+  backdrop-filter: blur(10px);
+}
+.project-ai-badge svg {
+  color: var(--primary);
+  filter: drop-shadow(0 0 5px rgba(183,243,107,.8));
+}
+.project-card.lime .project-ai-badge {
+  border-color: rgba(255,173,117,.55);
+  box-shadow: 0 0 22px rgba(255,173,117,.25);
+}
+.project-card.lime .project-ai-badge svg {
+  color: #ffad75;
+  filter: drop-shadow(0 0 5px rgba(255,173,117,.7));
+}
+
+/* Badge en la colección /proyectos */
+.collection-ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: 1px solid rgba(183,243,107,.4);
+  border-radius: 14px;
+  color: #c7f79a;
+  background: rgba(183,243,107,.07);
+  font: 10px var(--font-mono);
+  letter-spacing: .03em;
+}
+.collection-ai-badge svg {
+  color: var(--primary);
+  filter: drop-shadow(0 0 5px rgba(183,243,107,.8));
+}
+.collection-project-card.lime .collection-ai-badge {
+  border-color: rgba(255,173,117,.45);
+}
+.collection-project-card.lime .collection-ai-badge svg {
+  color: #ffad75;
+}
+
+/* ── Ficha del asistente de IA (base) ───────────────────── */
+.ai-assistant-card {
+  position: relative;
+  overflow: hidden;
+  padding: 26px;
+  border: 1px solid rgba(183,243,107,.25);
+  border-radius: 14px;
+  background:
+    radial-gradient(900px 320px at 90% -10%, rgba(183,243,107,.09), transparent 60%),
+    radial-gradient(700px 260px at -10% 110%, rgba(128,219,255,.06), transparent 55%),
+    rgba(10,15,9,.45);
+  box-shadow: inset 0 0 0 1px rgba(183,243,107,.04), 0 18px 50px -28px rgba(183,243,107,.3);
+}
+.ai-assistant-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent 0%, rgba(183,243,107,.05) 32%, transparent 48%, rgba(128,219,255,.04) 70%, transparent 100%);
+}
+.ai-assistant-head { display: flex; flex-direction: column; gap: 12px; }
+.ai-assistant-badge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 6px;
+  padding: 5px 11px;
+  border: 1px solid rgba(183,243,107,.45);
+  border-radius: 20px;
+  color: #d7ffae;
+  background: rgba(183,243,107,.09);
+  font: 10px var(--font-mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.ai-assistant-badge svg { color: var(--primary); filter: drop-shadow(0 0 6px rgba(183,243,107,.9)); }
+.ai-assistant-head h3 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -.03em;
+}
+.ai-assistant-head h3 svg { color: var(--primary); }
+.ai-assistant-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+.ai-assistant-stack span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: #b9f68a;
+  background: rgba(183,243,107,.05);
+  font: 11px var(--font-mono);
+}
+.ai-assistant-stack span svg { color: var(--primary); }
+.ai-assistant-summary {
+  margin: 18px 0 0 !important;
+  padding: 0;
+  font-size: 14px !important;
+  line-height: 1.7;
+  color: #c6cfdb !important;
+}
+.ai-assistant-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 22px 0 11px;
+  color: #b7f36b;
+  font: 11px var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+.ai-assistant-subtitle svg { color: var(--primary); }
+.ai-assistant-capabilities {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  gap: 10px;
+}
+.ai-assistant-capability {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 14px 15px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: rgba(183,243,107,.035);
+  transition: border-color .2s, transform .2s;
+}
+.ai-assistant-capability:hover { border-color: rgba(183,243,107,.35); transform: translateY(-2px); }
+.ai-assistant-capability strong {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: #edf2e5;
+}
+.ai-assistant-capability strong::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 8px rgba(183,243,107,.8);
+}
+.ai-assistant-capability span { font-size: 12px; line-height: 1.55; color: var(--muted-foreground); }
+.ai-assistant-highlights { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ai-assistant-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 9px 12px;
+  border-left: 2px solid rgba(183,243,107,.35);
+  background: rgba(183,243,107,.03);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #b6bfcc;
+}
+.ai-assistant-highlights li svg { flex-shrink: 0; margin-top: 3px; color: var(--primary); }
+
+/* Contexto detail-card y modal */
+.detail-card .ai-assistant-card {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.detail-card .ai-assistant-card::before { display: none; }
+.detail-card .ai-assistant-capability { background: rgba(7,10,14,.35); }
+.detail-card .ai-assistant-capability:hover { border-color: rgba(183,243,107,.35); }
+.modal-section > .ai-assistant-card { margin-top: 6px; }
+
+@media (max-width: 600px) {
+  .ai-assistant-card { padding: 20px 16px; }
+  .ai-assistant-capabilities { grid-template-columns: 1fr; }
+  .project-ai-badge { top: 42px; right: 10px; font-size: 8px; }
+}
+
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

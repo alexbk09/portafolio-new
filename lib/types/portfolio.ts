@@ -47,6 +47,32 @@ export interface TechDetail {
   role: string
 }
 
+/** Capacidad concreta que el asistente IA puede hacer */
+export interface AiCapability {
+  /** Nombre de la capacidad */
+  title: string
+  /** Descripción breve de la capacidad */
+  description: string
+}
+
+/** Asistente de IA integrado en el sistema (agente conversacional) */
+export interface AiAssistant {
+  /** Nombre del asistente (ej: "Asistente IluMax") */
+  name: string
+  /** Proveedor del modelo de lenguaje (ej: "DeepSeek API") */
+  provider: string
+  /** SDK/framework usado para el agente (ej: "Vercel AI SDK") */
+  sdk: string
+  /** Año de incorporación */
+  year?: string
+  /** Resumen de qué hace el asistente */
+  summary: string
+  /** Capacidades principales del asistente */
+  capabilities: AiCapability[]
+  /** Cualidades de ingeniería que demuestra la integración */
+  engineeringHighlights: string[]
+}
+
 /** Proyecto / sistema construido */
 export interface Project {
   /** Identificador único (slug) */
@@ -93,6 +119,8 @@ export interface Project {
   techDetails: TechDetail[]
   /** Es código abierto o privado */
   isOpenSource: boolean
+  /** Asistente de IA integrado en el sistema (opcional) */
+  aiAssistant?: AiAssistant
 }
 
 /** Experiencia laboral */

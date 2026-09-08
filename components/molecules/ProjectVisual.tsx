@@ -8,7 +8,7 @@
 
 import { useState } from 'react'
 import type { Project } from '@/lib/types/portfolio'
-import { Globe2, Code2, ShieldCheck } from 'lucide-react'
+import { Globe2, Code2, ShieldCheck, Sparkles } from 'lucide-react'
 
 interface ProjectVisualProps {
   /** Proyecto a mostrar */
@@ -55,6 +55,14 @@ export default function ProjectVisual({ project, index }: ProjectVisualProps) {
         {project.isOpenSource ? <Code2 size={9} /> : <ShieldCheck size={9} />}
         {project.isOpenSource ? 'Open source' : 'Contrato'}
       </span>
+
+      {/* Badge destacado cuando el sistema integra un asistente de IA */}
+      {project.aiAssistant && (
+        <span className="project-ai-badge">
+          <Sparkles size={10} />
+          IA integrada · {project.aiAssistant.sdk}
+        </span>
+      )}
 
       {/* Icono enlace de demo cuando existe */}
       {project.url && <span className="project-live-dot"><Globe2 size={13} /> En vivo</span>}

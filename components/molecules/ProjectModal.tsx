@@ -28,6 +28,7 @@ import Link from 'next/link'
 import type { Project } from '@/lib/types/portfolio'
 import { siteConfig, buildWhatsAppLink } from '@/lib/data/site'
 import WhatsAppIcon from '@/components/atoms/WhatsAppIcon'
+import AiAssistantSection from '@/components/atoms/AiAssistantSection'
 import { PROJECT_ROUTE } from '@/lib/config/seo'
 
 interface ProjectModalProps {
@@ -175,6 +176,13 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   ))}
                 </ul>
               </section>
+
+              {/* Asistente de IA integrado (si existe) */}
+              {project.aiAssistant && (
+                <div className="modal-section">
+                  <AiAssistantSection assistant={project.aiAssistant} />
+                </div>
+              )}
 
               {/* Funcionalidades */}
               <section className="modal-section">

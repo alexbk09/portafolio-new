@@ -25,6 +25,7 @@ import {
 } from 'lucide-react'
 import { projects } from '@/lib/data/projects'
 import JsonLd from '@/components/atoms/JsonLd'
+import AiAssistantSection from '@/components/atoms/AiAssistantSection'
 import { buildWhatsAppLink, siteConfig } from '@/lib/data/site'
 import WhatsAppIcon from '@/components/atoms/WhatsAppIcon'
 import {
@@ -163,6 +164,13 @@ function ProjectDetailPage({ project }: { project: Project }) {
           ))}
         </ul>
       </section>
+
+      {/* Asistente de IA integrado (si existe) */}
+      {project.aiAssistant && (
+        <section className="detail-card detail-full">
+          <AiAssistantSection assistant={project.aiAssistant} />
+        </section>
+      )}
 
       {/* Funcionalidades */}
       <section className="detail-card detail-full">

@@ -5,7 +5,7 @@
  */
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
 import { projects } from '@/lib/data/projects'
 import JsonLd from '@/components/atoms/JsonLd'
 import { absoluteUrl, PROJECT_ROUTE } from '@/lib/config/seo'
@@ -48,6 +48,11 @@ export default function ProyectosPage() {
           <article key={project.id} className={`collection-project-card ${project.accent}`}>
             <div className="collection-project-info">
               <p className="eyebrow">{project.client} · {project.year}</p>
+              {project.aiAssistant && (
+                <span className="collection-ai-badge">
+                  <Sparkles size={10} /> IA integrada · {project.aiAssistant.sdk}
+                </span>
+              )}
               <h2><Link href={PROJECT_ROUTE(project.id)}>{project.title}</Link></h2>
               <p>{project.description}</p>
               <div className="tag-list">
