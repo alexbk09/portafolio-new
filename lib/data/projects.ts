@@ -11,6 +11,66 @@ import type { Project } from '@/lib/types/portfolio'
 
 export const projects: Project[] = [
   {
+    id: 'zonadehobbies',
+    title: 'Zonadehobbies',
+    description:
+      'Tienda de afiliados AliExpress enfocada en nichos de hobbies (anime, arcade, gaming, barismo y detailing): importa productos por API, scraping de fotos y descripciones, fichas con FAQ y un módulo de clics para saber qué producto vende y optimizar comisiones.',
+    longDescription:
+      'Zonadehobbies es una plataforma de afiliación de AliExpress construida con la misma base de Ilumax: tienda, panel administrativo con roles y dashboard de KPIs. El catálogo se importa consumiendo la API de AliExpress; un módulo de scraping extrae fotos y descripciones del anuncio original y normaliza cada ficha generando características, especificaciones y preguntas frecuentes automáticas. La tienda muestra el precio en USD y en moneda local, redirige al comprador a AliExpress con el enlace de afiliado y registra cada clic en un módulo de analytics: qué producto, desde qué categoría, con qué país, dispositivo y origen. Las páginas SEO automáticas por producto y por categoría atraen tráfico orgánico constante.',
+    mainImage: '/images/projects/zonadehobbies/home.png',
+    fallbackVisual: 'Zonadehobbies',
+    technologies: 'Next.js, Supabase, TypeScript, Tailwind, React, API AliExpress, Web Scraping, Analytics de clics',
+    url: 'https://zonadehobbies.vercel.app/',
+    githubUrl: '',
+    galleryImages: ['/images/projects/zonadehobbies/home.png'],
+    accent: 'orange',
+    client: 'Tienda afiliada AliExpress · nicho hobbies',
+    role: 'Full Stack Developer',
+    year: '2025',
+    challenge:
+      'Montar y mantener a mano un catálogo de afiliados de AliExpress es inviable: copiar fotos, traducir y resumir descripciones de cientos de productos toma horas y queda desactualizado en días. Además, sin medición, el dueño no sabe qué productos reciben clics, de dónde llegan los visitantes ni qué enlaces de afiliado generan comisiones reales.',
+    solution:
+      'Construí una plataforma de afiliación completa sobre la arquitectura de Ilumax: catálogo, panel administrativo y roles. La importación se automatiza consumiendo la API de AliExpress; un módulo de scraping extrae fotos y descripciones del anuncio original, las normaliza y arma fichas listas para publicar con características, especificaciones y FAQ; y un tracker registra cada clic hacia AliExpress con su producto, origen, categoría, país y dispositivo. El admin decide qué ofertas impulsar con datos reales del dashboard.',
+    improvements: [
+      { description: 'Automatizó el alta del catálogo: los productos llegan por API y scraping sin copiar datos a mano.' },
+      { description: 'Fichas enriquecidas y consistentes con fotos, descripciones y FAQ generadas por producto.' },
+      { description: 'Visibilidad total de rendimiento: clics por producto, categoría, país y dispositivo.' },
+      { description: 'Identificación de los productos que realmente reciben clics para impulsar las mejores comisiones.' },
+      { description: 'Tráfico orgánico recurrente con páginas SEO dedicadas por producto y categoría.' },
+      { description: 'Menos fricción de compra mostrando el precio en USD y en moneda local (bolívares).' },
+    ],
+    painPoints: [
+      { label: 'Alta manual de productos AliExpress, lenta y desactualizada' },
+      { label: 'Copiar fotos y descripciones de cientos de anuncios a mano' },
+      { label: 'Sin medición de clics ni de qué productos generan comisiones' },
+      { label: 'Enlaces de afiliado dispersos y sin seguimiento' },
+      { label: 'Precio solo en dólar que frena al comprador local' },
+    ],
+    features: [
+      { title: 'Importación por API AliExpress', description: 'Consume la API de productos y afiliados para traer ofertas, precio y disponibilidad.' },
+      { title: 'Scraping de producto', description: 'Extrae fotos y descripciones del anuncio original y las normaliza automáticamente.' },
+      { title: 'Fichas con FAQ generadas', description: 'Características, especificaciones y preguntas frecuentes por producto.' },
+      { title: 'Catálogo por nichos', description: 'Anime, arcade, gaming, barismo, detailing y más, cada uno con su propia página.' },
+      { title: 'Precio en dos monedas', description: 'USD y moneda local para reducir la fricción del comprador.' },
+      { title: 'Enlace de afiliado', description: 'Redirección segura a AliExpress con el enlace de afiliado del dueño.' },
+      { title: 'Tracker de clics', description: 'Registra cada clic con producto, origen, categoría, país y dispositivo.' },
+      { title: 'Dashboard de rendimiento', description: 'Top de productos por clics y comisiones estimadas para decidir qué impulsar.' },
+      { title: 'Páginas SEO (pSEO)', description: 'URLs indexables por producto y categoría para tráfico orgánico.' },
+      { title: 'Panel administrativo', description: 'Control de productos importados, scraping, ofertas y métricas con roles.' },
+    ],
+    techDetails: [
+      { name: 'Next.js + TypeScript', role: 'App Router, páginas SSR/SSG de producto y categoría y API routes.' },
+      { name: 'API AliExpress (afiliados)', role: 'Búsqueda, detalle y generación de enlaces de afiliado desde el backend.' },
+      { name: 'Motor de scraping', role: 'Extrae fotos y descripciones del anuncio y normaliza el contenido de la ficha.' },
+      { name: 'Supabase', role: 'Catálogo, eventos de clics, autenticación y roles con políticas RLS.' },
+      { name: 'Tracker de clics', role: 'Registra eventos de salida a AliExpress con contexto para reportes agregados.' },
+      { name: 'pSEO (Programmatic SEO)', role: 'Genera páginas de producto y categoría desde datos estructurados.' },
+      { name: 'Tailwind CSS', role: 'UI responsiva, rápida y consistente con la identidad de marca.' },
+    ],
+    isOpenSource: false,
+  },
+
+  {
     id: 'services',
     title: 'Services',
     description: 'Plataforma de agendamiento de servicios con calendario visual, horas y precios. Administración completa de servicios, clientes, pagos, notificaciones y dashboard de métricas en tiempo real.',

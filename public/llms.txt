@@ -25,6 +25,7 @@ Laravel/PHP · Node.js · React · Next.js · Vue.js · Angular · TypeScript ·
 - https://portafolio-new-jet.vercel.app/proyectos/akimax-pet — Veterinaria precios duales.
 - https://portafolio-new-jet.vercel.app/proyectos/dantojos — Pastelería configurador WhatsApp.
 - https://portafolio-new-jet.vercel.app/proyectos/ilumax — Tienda Supabase panel admin.
+- https://portafolio-new-jet.vercel.app/proyectos/zonadehobbies — Afiliados AliExpress scraping + clics.
 - https://portafolio-new-jet.vercel.app/proyectos/ecommerce — Laravel + React CRM/facturación.
 - https://portafolio-new-jet.vercel.app/proyectos/portafolio-laravel — Laravel + IA FastAPI.
 - https://portafolio-new-jet.vercel.app/proyectos/aytec — Médica Laravel + Vue roles.

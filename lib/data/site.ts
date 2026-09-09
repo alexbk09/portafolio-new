@@ -40,7 +40,7 @@ export const siteConfig = {
   /** Años de experiencia (mostrado en el hero) */
   yearsOfExperience: 7,
   /** Conteo de proyectos publicados en el portafolio (se actualiza en projects.ts) */
-  projectCount: 16,
+  projectCount: 18,
   /** Configuración de WhatsApp para contactar */
   whatsapp: {
     /** Número con código de país en formato internacional */

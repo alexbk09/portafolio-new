@@ -13,7 +13,7 @@ import { absoluteUrl, PROJECT_ROUTE } from '@/lib/config/seo'
 export const metadata: Metadata = {
   title: 'Proyectos y sistemas en producción',
   description:
-    '16 sistemas construidos por Keiber Paez: e-commerce con doble moneda, plataformas médicas, facturación electrónica, SaaS, agendamiento y más. Cada caso con problema, solución, stack y resultados medibles.',
+    `${projects.length} sistemas construidos por Keiber Paez: e-commerce con doble moneda, plataformas médicas, facturación electrónica, SaaS, agendamiento, afiliados y más. Cada caso con problema, solución, stack y resultados medibles.`,
   alternates: { canonical: absoluteUrl('/proyectos') },
   openGraph: {
     title: 'Proyectos y sistemas en producción — Keiber Paez',
@@ -88,7 +88,7 @@ export default function ProyectosPage() {
             url: absoluteUrl('/proyectos'),
             name: 'Proyectos y sistemas construidos por Keiber Paez',
             description:
-              '16 sistemas en producción: e-commerce, SaaS, plataformas médicas, facturación electrónica, agendamiento y más.',
+              `${projects.length} sistemas en producción: e-commerce, SaaS, plataformas médicas, facturación electrónica, agendamiento y más.`,
             inLanguage: 'es',
             isPartOf: { '@id': absoluteUrl('/') + '#website' },
             mainEntity: { '@id': absoluteUrl('/proyectos') + '#itemlist' },

@@ -74,7 +74,7 @@ export default function Home() {
             </p>
           </div>
           <Link href="/proyectos" className="button button-primary include-cta-button">
-            Ver los 16 casos de estudio →
+            Ver los {projects.length} casos de estudio →
           </Link>
         </div>
       </section>
