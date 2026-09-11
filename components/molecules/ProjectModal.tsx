@@ -17,6 +17,7 @@ import {
   GraduationCap,
   Layers,
   Play,
+  ShoppingCart,
   Target,
   TrendingUp,
   User2,
@@ -30,6 +31,7 @@ import { siteConfig, buildWhatsAppLink } from '@/lib/data/site'
 import WhatsAppIcon from '@/components/atoms/WhatsAppIcon'
 import AiAssistantSection from '@/components/atoms/AiAssistantSection'
 import { PROJECT_ROUTE } from '@/lib/config/seo'
+import { getProjectAcquisition } from '@/lib/data/licenses'
 
 interface ProjectModalProps {
   /** Proyecto a mostrar en detalle */
@@ -44,6 +46,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     ? `Hola Keiber, vi tu sistema "${project.title}" y me gustaría información para implementar algo similar.`
     : siteConfig.whatsapp.defaultMessage
   const whatsappUrl = buildWhatsAppLink(siteConfig.whatsapp.phone, whatsappMessage)
+
+  // Condiciones comerciales del sistema mostrado: licencia propia o a medida
+  const acquisition = project ? getProjectAcquisition(project.id) : undefined
 
   // Bloquear scroll del body mientras el modal esté abierto
   useEffect(() => {
@@ -92,6 +97,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   {project.isOpenSource ? ' Código abierto' : ' Sistema privado'}
                 </p>
                 <h2>{project.title}</h2>
+                {acquisition && (
+                  <span className={`detail-acquisition-badge ${acquisition.kind}`}>
+                    <ShoppingCart size={11} />
+                    {acquisition.kind === 'license'
+                      ? 'Licencia disponible · Entrega en cualquier país'
+                      : 'Se construye a medida · Entrega en cualquier país'}
+                  </span>
+                )}
                 <div className="modal-meta">
                   <span><User2 size={12} /> {project.role}</span>
                   <span><CalendarDays size={12} /> {project.year}</span>

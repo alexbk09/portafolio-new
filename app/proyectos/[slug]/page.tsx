@@ -17,6 +17,7 @@ import {
   ExternalLink,
   GraduationCap,
   Layers,
+  ShoppingCart,
   Target,
   TrendingUp,
   User2,
@@ -24,6 +25,9 @@ import {
   Wrench,
 } from 'lucide-react'
 import { projects } from '@/lib/data/projects'
+import { getProjectAcquisition } from '@/lib/data/licenses'
+import ProjectAcquisitionCard from '@/components/molecules/ProjectAcquisitionCard'
+import { formatUsd } from '@/lib/config/commerce'
 import JsonLd from '@/components/atoms/JsonLd'
 import AiAssistantSection from '@/components/atoms/AiAssistantSection'
 import { buildWhatsAppLink, siteConfig } from '@/lib/data/site'
@@ -32,6 +36,7 @@ import {
   absoluteUrl,
   breadcrumbJsonLd,
   faqPageJsonLd,
+  projectAcquisitionJsonLd,
   PROJECT_ROUTE,
   softwareProjectDetailJsonLd,
   videoObjectJsonLd,
@@ -56,10 +61,17 @@ export async function generateMetadata({
   const project = projects.find((p) => p.id === slug)
   if (!project) return {}
   const url = absoluteUrl(PROJECT_ROUTE(project.id))
+  // Si el sistema tiene licencia pública, el precio entra en la meta description:
+  // es lo que más aumenta el CTR en resultados de búsqueda comerciales.
+  const acquisition = getProjectAcquisition(project.id)
+  const priceLabel =
+    typeof acquisition?.priceFromUsd === 'number'
+      ? ` Disponible como licencia desde ${formatUsd(acquisition.priceFromUsd)} USD para cualquier país.`
+      : ''
 
   return {
     title: `${project.title} — Caso de estudio | Desarrollador Full Stack`,
-    description: project.description.slice(0, 160),
+    description: `${project.description.slice(0, 160)}${priceLabel}`,
     alternates: { canonical: url },
     openGraph: {
       title: `${project.title} — Sistema construido por Keiber Paez`,
@@ -91,6 +103,9 @@ function ProjectDetailPage({ project }: { project: Project }) {
   const whatsappMessage = `Hola Keiber, vi tu sistema "${project.title}" y me gustaría información para implementar algo similar.`
   const whatsappUrl = buildWhatsAppLink(siteConfig.whatsapp.phone, whatsappMessage)
 
+  // Condiciones comerciales publicadas: licencia propia o desarrollo a medida
+  const acquisition = getProjectAcquisition(project.id)
+
   return (
     <article className={`project-detail ${project.accent}`}>
       {/* Breadcrumb visible (navegación UX + SEO) */}
@@ -111,6 +126,14 @@ function ProjectDetailPage({ project }: { project: Project }) {
           {project.isOpenSource ? <Code2 size={11} /> : <Building2 size={11} />}
           {project.isOpenSource ? ' Código abierto' : ' Sistema privado'}
         </p>
+        {acquisition && (
+          <span className={`detail-acquisition-badge ${acquisition.kind}`}>
+            <ShoppingCart size={11} />
+            {acquisition.kind === 'license'
+              ? ' Licencia disponible · Entrega en cualquier país'
+              : ' Se construye a medida · Entrega en cualquier país'}
+          </span>
+        )}
         <h1>{project.title}</h1>
         <div className="detail-meta">
           <span><User2 size={12} /> {project.role}</span>
@@ -215,7 +238,20 @@ function ProjectDetailPage({ project }: { project: Project }) {
             <p>{improvement.description}</p>
           </div>
         ))}
+        {acquisition && (
+          <>
+            <h3>{`¿Se puede comprar ${project.title}?`}</h3>
+            <p>{acquisition.summary}</p>
+            <h3>{`¿En qué países puedo adquirir ${project.title}?`}</h3>
+            <p>
+              {`En cualquier país: ${acquisition.coverage}. La entrega y el soporte son 100% remotos, con respuesta en menos de 24 horas.`}
+            </p>
+          </>
+        )}
       </section>
+
+      {/* Oferta comercial: licencia propia o desarrollo a medida */}
+      {acquisition && <ProjectAcquisitionCard project={project} acquisition={acquisition} />}
 
       {/* CTAs de conversión */}
       <div className="detail-actions">
@@ -269,6 +305,7 @@ function ProjectDetailPage({ project }: { project: Project }) {
 
       {/* Schemas estructurados del caso de estudio */}
       <JsonLd data={softwareProjectDetailJsonLd(project)} />
+      {acquisition && <JsonLd data={projectAcquisitionJsonLd(project, acquisition)} />}
       <JsonLd data={faqPageJsonLd(project)} />
       {videoObjectJsonLd(project) && <JsonLd data={videoObjectJsonLd(project) as Record<string, unknown>} />}
       <JsonLd

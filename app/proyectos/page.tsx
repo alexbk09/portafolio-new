@@ -5,10 +5,12 @@
  */
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowUpRight, Sparkles } from 'lucide-react'
+import { ArrowUpRight, ShoppingCart, Sparkles } from 'lucide-react'
 import { projects } from '@/lib/data/projects'
 import JsonLd from '@/components/atoms/JsonLd'
-import { absoluteUrl, PROJECT_ROUTE } from '@/lib/config/seo'
+import { getProjectAcquisition } from '@/lib/data/licenses'
+import { formatUsd } from '@/lib/config/commerce'
+import { absoluteUrl, MAP_ROUTE, PROJECT_ROUTE, purchasableProductsJsonLd } from '@/lib/config/seo'
 
 export const metadata: Metadata = {
   title: 'Proyectos y sistemas en producción',
@@ -22,6 +24,15 @@ export const metadata: Metadata = {
     url: absoluteUrl('/proyectos'),
   },
 }
+
+/**
+ * Proyectos con su oferta comercial resuelta (licencia propia o a medida).
+ * Se calcula una sola vez para no repetir búsquedas en cada render.
+ */
+const collection = projects.map((project) => ({
+  project,
+  acquisition: getProjectAcquisition(project.id),
+}))
 
 export default function ProyectosPage() {
   return (
@@ -43,8 +54,18 @@ export default function ProyectosPage() {
         </p>
       </header>
 
+      {/* Puente comercial: licencias propias con entrega global */}
+      <p className="collection-license-note">
+        <ShoppingCart size={12} />
+        <span>
+          Los sistemas propios están disponibles como licencia única, suscripción SaaS o código
+          fuente, con entrega y soporte <strong>en cualquier país</strong>. Consulta el{' '}
+          <Link href={MAP_ROUTE}>mapa del sitio</Link> para ver el catálogo completo.
+        </span>
+      </p>
+
       <div className="projects-list">
-        {projects.map((project) => (
+        {collection.map(({ project, acquisition }) => (
           <article key={project.id} className={`collection-project-card ${project.accent}`}>
             <div className="collection-project-info">
               <p className="eyebrow">{project.client} · {project.year}</p>
@@ -54,6 +75,15 @@ export default function ProyectosPage() {
                 </span>
               )}
               <h2><Link href={PROJECT_ROUTE(project.id)}>{project.title}</Link></h2>
+              {acquisition && (
+                <span className={`collection-license-badge ${acquisition.kind}`}>
+                  <ShoppingCart size={10} />
+                  {acquisition.kind === 'license' ? 'Licencia disponible' : 'Se construye a medida'}
+                  {typeof acquisition.priceFromUsd === 'number'
+                    ? ` · desde ${formatUsd(acquisition.priceFromUsd)}`
+                    : ''}
+                </span>
+              )}
               <p>{project.description}</p>
               <div className="tag-list">
                 {project.technologies.split(',').slice(0, 4).map((tag) => (
@@ -77,6 +107,9 @@ export default function ProyectosPage() {
           </article>
         ))}
       </div>
+
+      {/* JSON-LD del catálogo comercial: sistemas comprables con precio y cobertura */}
+      <JsonLd data={purchasableProductsJsonLd(projects)} />
 
       {/* JSON-LD para indexación de colección e ítems */}
       <JsonLd

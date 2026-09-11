@@ -18,7 +18,7 @@ import ContactSection from '@/components/organisms/ContactSection'
 import JsonLd from '@/components/atoms/JsonLd'
 import { projects } from '@/lib/data/projects'
 import { siteConfig } from '@/lib/data/site'
-import { softwareProjectsJsonLd, SITE_URL, breadcrumbJsonLd } from '@/lib/config/seo'
+import { softwareProjectsJsonLd, purchasableProductsJsonLd, SITE_URL, breadcrumbJsonLd } from '@/lib/config/seo'
 
 /* Metadata específica de la home. El layout raíz aporta el resto (OG/Twitter global). */
 export const metadata: Metadata = {
@@ -70,7 +70,8 @@ export default function Home() {
             <h2 className="include-title">Cada sistema con su página de caso</h2>
             <p className="section-copy">
               Explora el problema, la solución, el stack y los resultados medibles de cada sistema
-              en una página dedicada, pensada para reclutadores, clientes y buscadores.
+              en una página dedicada, pensada para reclutadores, clientes y buscadores. Los sistemas
+            propios también se venden como licencia, con entrega y soporte en cualquier país.
             </p>
           </div>
           <Link href="/proyectos" className="button button-primary include-cta-button">
@@ -90,6 +91,7 @@ export default function Home() {
 
       {/* Datos estructurados: lista de software construido + breadcrumb */}
       <JsonLd data={softwareProjectsJsonLd(projects)} />
+      <JsonLd data={purchasableProductsJsonLd(projects)} />
       <JsonLd data={breadcrumbJsonLd([{ name: 'Inicio', path: '/' }])} />
     </main>
   )
