@@ -55,9 +55,9 @@ export function GET() {
     ...licensed.map(({ project, acquisition }) => {
       const price =
         typeof acquisition?.priceFromUsd === 'number'
-          ? ` Desde ${formatUsd(acquisition.priceFromUsd)}.`
+          ? ` Desde ${formatUsd(acquisition.priceFromUsd)}.${acquisition.plans?.length ? ` Planes: ${acquisition.plans.map((plan) => `${plan.name} ${formatUsd(plan.priceUsd)}${plan.period === 'month' ? '/mes' : ' pago unico'}`).join('; ')}.` : ''}`
           : ''
-      return `- ${absoluteUrl(PROJECT_ROUTE(project.id))} — ${project.title}: ${acquisition?.summary} Modelos: ${acquisition?.models.join(', ')}. Entrega en ${acquisition?.deliveryDays} dias.${price}`
+      return `- ${absoluteUrl(PROJECT_ROUTE(project.id))} — ${project.title}: ${acquisition?.summary} Modelos: ${acquisition?.models.join(', ')}. Entrega en ${acquisition?.deliveryDays} dias.${price}${project.manualUrl ? ` Manual de usuario: ${project.manualUrl}.` : ''}`
     }),
     '',
     '## Sistemas construidos a medida (se replican con tu marca)',

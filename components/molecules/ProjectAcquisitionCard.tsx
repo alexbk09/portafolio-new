@@ -56,7 +56,7 @@ export default function ProjectAcquisitionCard({
           <h2 id={`acquisition-title-${project.id}`}>{acquisition.headline}</h2>
           <p className="acquisition-summary">{acquisition.summary}</p>
         </div>
-        {typeof acquisition.priceFromUsd === 'number' && (
+        {!acquisition.plans?.length && typeof acquisition.priceFromUsd === 'number' && (
           <p className="acquisition-price">
             <span>Desde</span>
             <strong>{formatUsd(acquisition.priceFromUsd)}</strong>
@@ -64,6 +64,36 @@ export default function ProjectAcquisitionCard({
           </p>
         )}
       </div>
+
+      {/* Tabla de precios: licencia única y suscripciones mensuales */}
+      {acquisition.plans?.length ? (
+        <div className="acquisition-plans">
+          {acquisition.plans.map((plan) => (
+            <article
+              key={plan.name}
+              className={`acquisition-plan ${plan.highlighted ? 'is-featured' : ''}`}
+            >
+              <header className="acquisition-plan-head">
+                <h3>{plan.name}</h3>
+                {plan.highlighted && <span className="acquisition-plan-tag">Más elegido</span>}
+              </header>
+              <p className="acquisition-plan-price">
+                <strong>{formatUsd(plan.priceUsd)}</strong>
+                <span>{plan.period === 'month' ? 'USD / mes' : 'USD · pago único'}</span>
+              </p>
+              <p className="acquisition-plan-for">{plan.forWhom}</p>
+              <ul className="acquisition-plan-features">
+                {plan.features.map((feature) => (
+                  <li key={feature}>
+                    <CheckCircle2 size={14} />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      ) : null}
 
       {/* Modelos de compra disponibles */}
       <div className="tag-list acquisition-models">

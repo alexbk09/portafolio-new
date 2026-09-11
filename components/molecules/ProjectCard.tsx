@@ -36,7 +36,7 @@ export default function ProjectCard({ project, index, onOpenDetails }: ProjectCa
         {acquisition && (
           <span className={`project-license-badge ${acquisition.kind}`}>
             <ShoppingCart size={10} />
-            {acquisition.kind === 'license' ? 'Licencia disponible · Global' : 'Construible a medida'}
+            {acquisition.kind === 'license' ? 'Licencia o SaaS · Global' : 'Construible a medida'}
           </span>
         )}
         <h3>{project.title}</h3>

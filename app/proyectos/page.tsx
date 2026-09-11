@@ -78,7 +78,7 @@ export default function ProyectosPage() {
               {acquisition && (
                 <span className={`collection-license-badge ${acquisition.kind}`}>
                   <ShoppingCart size={10} />
-                  {acquisition.kind === 'license' ? 'Licencia disponible' : 'Se construye a medida'}
+                  {acquisition.kind === 'license' ? 'Licencia o SaaS' : 'Se construye a medida'}
                   {typeof acquisition.priceFromUsd === 'number'
                     ? ` · desde ${formatUsd(acquisition.priceFromUsd)}`
                     : ''}

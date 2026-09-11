@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation'
 import {
   ArrowLeft,
   ArrowUpRight,
+  BookOpen,
   Building2,
   CalendarDays,
   CheckCircle2,
@@ -25,7 +26,7 @@ import {
   Wrench,
 } from 'lucide-react'
 import { projects } from '@/lib/data/projects'
-import { getProjectAcquisition } from '@/lib/data/licenses'
+import { getEntryMonthlyPlan, getOneTimePlan, getProjectAcquisition } from '@/lib/data/licenses'
 import ProjectAcquisitionCard from '@/components/molecules/ProjectAcquisitionCard'
 import { formatUsd } from '@/lib/config/commerce'
 import JsonLd from '@/components/atoms/JsonLd'
@@ -64,9 +65,15 @@ export async function generateMetadata({
   // Si el sistema tiene licencia pública, el precio entra en la meta description:
   // es lo que más aumenta el CTR en resultados de búsqueda comerciales.
   const acquisition = getProjectAcquisition(project.id)
+  const oneTimePlan = acquisition ? getOneTimePlan(acquisition) : undefined
+  const monthlyPlan = acquisition ? getEntryMonthlyPlan(acquisition) : undefined
+  const priceParts = [
+    oneTimePlan ? `licencia desde ${formatUsd(oneTimePlan.priceUsd)} USD` : null,
+    monthlyPlan ? `suscripción desde ${formatUsd(monthlyPlan.priceUsd)} USD/mes` : null,
+  ].filter((part): part is string => part !== null)
   const priceLabel =
-    typeof acquisition?.priceFromUsd === 'number'
-      ? ` Disponible como licencia desde ${formatUsd(acquisition.priceFromUsd)} USD para cualquier país.`
+    priceParts.length > 0
+      ? ` Disponible con ${priceParts.join(' o ')} para cualquier país.`
       : ''
 
   return {
@@ -130,7 +137,7 @@ function ProjectDetailPage({ project }: { project: Project }) {
           <span className={`detail-acquisition-badge ${acquisition.kind}`}>
             <ShoppingCart size={11} />
             {acquisition.kind === 'license'
-              ? ' Licencia disponible · Entrega en cualquier país'
+              ? ' Licencia o SaaS · Entrega en cualquier país'
               : ' Se construye a medida · Entrega en cualquier país'}
           </span>
         )}
@@ -266,6 +273,18 @@ function ProjectDetailPage({ project }: { project: Project }) {
             Ver demo en vivo <ArrowUpRight size={14} />
           </a>
         )}
+        {project.manualUrl && (
+          <a
+            href={project.manualUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="button button-ghost"
+            aria-label={`Ver el manual de usuario de ${project.title}`}
+          >
+            <BookOpen size={14} /> Ver manual de usuario
+          </a>
+        )}
+
         {project.githubUrl && (
           <a
             href={project.githubUrl}

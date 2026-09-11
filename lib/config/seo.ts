@@ -340,6 +340,8 @@ export function softwareProjectDetailJsonLd(project: Project) {
   }
   if (project.url) item.url = project.url
   if (project.githubUrl) item.codeRepository = project.githubUrl
+  // Manual público: prueba de producto real y ayuda indexable del software
+  if (project.manualUrl) item.softwareHelp = { '@type': 'CreativeWork', url: project.manualUrl }
 
   // Limpieza de valores undefined para JSON-LD valido
   Object.keys(item).forEach((key) => {
@@ -397,8 +399,46 @@ function productNode(project: Project, acquisition: ProjectAcquisition) {
     seller: { '@id': `${SITE_URL}#organization` },
   }
 
-  // Sin precio público (desarrollo a medida) el Product se publica sin Offer
-  if (typeof acquisition.priceFromUsd === 'number') {
+  // Ofertas publicadas: una por plan (licencia única + suscripciones mensuales).
+  // Google entiende el rango de precio y la periodicidad de cada modalidad.
+  if (acquisition.plans?.length) {
+    const planPrices = acquisition.plans.map((plan) => plan.priceUsd)
+    node.offers = {
+      '@type': 'AggregateOffer',
+      priceCurrency: COMMERCE_CURRENCY,
+      lowPrice: Math.min(...planPrices),
+      highPrice: Math.max(...planPrices),
+      offerCount: acquisition.plans.length,
+      availability: 'https://schema.org/InStock',
+      priceValidUntil: priceValidUntil(),
+      url,
+      areaServed: { '@type': 'Place', name: WORLDWIDE_REGION },
+      eligibleRegion: { '@type': 'Place', name: WORLDWIDE_REGION },
+      seller: { '@id': `${SITE_URL}#organization` },
+      offers: acquisition.plans.map((plan) => ({
+        '@type': 'Offer',
+        name: plan.name,
+        price: plan.priceUsd,
+        priceCurrency: COMMERCE_CURRENCY,
+        availability: 'https://schema.org/InStock',
+        priceValidUntil: priceValidUntil(),
+        url,
+        eligibleRegion: { '@type': 'Place', name: WORLDWIDE_REGION },
+        // Las suscripciones declaran periodicidad mensual (UN/CEFACT MON)
+        ...(plan.period === 'month'
+          ? {
+              priceSpecification: {
+                '@type': 'UnitPriceSpecification',
+                price: plan.priceUsd,
+                priceCurrency: COMMERCE_CURRENCY,
+                billingIncrement: 1,
+                unitCode: 'MON',
+              },
+            }
+          : {}),
+      })),
+    }
+  } else if (typeof acquisition.priceFromUsd === 'number') {
     node.offers = {
       '@type': 'AggregateOffer',
       priceCurrency: COMMERCE_CURRENCY,

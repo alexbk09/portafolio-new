@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowUpRight,
+  BookOpen,
   Building2,
   CalendarDays,
   CheckCircle2,
@@ -101,7 +102,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   <span className={`detail-acquisition-badge ${acquisition.kind}`}>
                     <ShoppingCart size={11} />
                     {acquisition.kind === 'license'
-                      ? 'Licencia disponible · Entrega en cualquier país'
+                      ? 'Licencia o SaaS · Entrega en cualquier país'
                       : 'Se construye a medida · Entrega en cualquier país'}
                   </span>
                 )}
@@ -244,6 +245,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 {project.githubUrl && (
                   <a href={project.githubUrl} target="_blank" rel="noreferrer" className="button button-ghost">
                     <Code2 size={14} /> GitHub
+                  </a>
+                )}
+                {project.manualUrl && (
+                  <a
+                    href={project.manualUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="button button-ghost"
+                  >
+                    <BookOpen size={14} /> Ver manual de usuario
                   </a>
                 )}
                 <Link href={PROJECT_ROUTE(project.id)} onClick={onClose} className="button button-ghost">

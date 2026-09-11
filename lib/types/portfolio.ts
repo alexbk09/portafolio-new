@@ -93,6 +93,8 @@ export interface Project {
   url: string
   /** URL del repositorio (vacío si es código cerrado) */
   githubUrl: string
+  /** URL del manual de usuario público del sistema (vacío si no existe) */
+  manualUrl?: string
   /** Video demo (ruta estática o vacío) */
   videoUrl?: string
   /** Imágenes adicionales del sistema */

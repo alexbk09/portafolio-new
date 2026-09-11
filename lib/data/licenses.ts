@@ -23,6 +23,25 @@ import {
 /** Tipo de adquisición disponible para un sistema */
 export type AcquisitionKind = 'license' | 'custom'
 
+/**
+ * Plan o modalidad de compra publicada de un sistema.
+ * Puede ser pago único (licencia) o suscripción mensual (SaaS gestionado).
+ */
+export interface AcquisitionPlan {
+  /** Nombre comercial del plan (Licencia única, Esencial, Profesional...) */
+  name: string
+  /** Precio en USD */
+  priceUsd: number
+  /** Periodicidad del cobro */
+  period: 'once' | 'month'
+  /** Para quién está pensado el plan, en una línea */
+  forWhom: string
+  /** Qué incluye este plan concreto */
+  features: string[]
+  /** Marca visualmente el plan recomendado */
+  highlighted?: boolean
+}
+
 /** Condiciones comerciales publicadas de un sistema */
 export interface ProjectAcquisition {
   /** Modelo comercial: licencia propia o desarrollo a medida */
@@ -33,8 +52,10 @@ export interface ProjectAcquisition {
   summary: string
   /** Modelos de compra disponibles (licencia única, SaaS, código fuente, a medida) */
   models: string[]
-  /** Precio mínimo en USD. Ausente = cotización personalizada */
+  /** Precio mínimo de licencia única en USD. Ausente = cotización personalizada */
   priceFromUsd?: number
+  /** Tabla de planes publicada (licencia única + suscripciones mensuales) */
+  plans?: AcquisitionPlan[]
   /** Qué recibe el comprador de forma concreta */
   includes: string[]
   /** Días hábiles de entrega/activación */
@@ -62,6 +83,7 @@ function licenseOffer(config: {
   summary: string
   includes: string[]
   priceFromUsd?: number
+  plans?: AcquisitionPlan[]
 }): ProjectAcquisition {
   return {
     kind: 'license',
@@ -69,6 +91,7 @@ function licenseOffer(config: {
     summary: config.summary,
     models: [...OWNED_SYSTEM_MODELS],
     priceFromUsd: config.priceFromUsd ?? LICENSE_PRICE_FROM_USD,
+    plans: config.plans,
     includes: config.includes,
     deliveryDays: DEFAULT_DELIVERY_DAYS,
     coverage: WORLDWIDE_COVERAGE,
@@ -108,6 +131,62 @@ export const projectAcquisitions: Record<string, ProjectAcquisition> = {
   zonadehobbies: licenseOffer({
     summary:
       'Plataforma de afiliación AliExpress lista para operar: importa productos por API, arma fichas con scraping y mide cada clic hacia el enlace de afiliado. Se vende como licencia y se instala en tu dominio en cualquier país.',
+    // Planes calibrados con el mercado: AliDropship (licencia $89 pago único) y
+    // plataformas de afiliación SaaS. La cuota mensual cubre hosting, cuotas de
+    // API de AliExpress y la infraestructura de scraping.
+    priceFromUsd: 690,
+    plans: [
+      {
+        name: 'Licencia única',
+        priceUsd: 690,
+        period: 'once',
+        forWhom: 'Para operar el sistema en tu propio servidor, sin cuotas.',
+        features: [
+          'Código fuente completo y despliegue en tu dominio',
+          'Importación por API AliExpress + motor de scraping',
+          'Tracker de clics y dashboard de comisiones',
+          'Páginas pSEO por producto y categoría',
+          '6 meses de actualizaciones incluidas',
+        ],
+      },
+      {
+        name: 'Esencial',
+        priceUsd: 59,
+        period: 'month',
+        forWhom: 'Para lanzar tu primera tienda de nicho.',
+        features: [
+          'Hosting gestionado y cuotas de API incluidas',
+          'Hasta 1.000 productos importados',
+          'Scraping programado semanal',
+          '1 tienda · 1 país',
+        ],
+      },
+      {
+        name: 'Profesional',
+        priceUsd: 119,
+        period: 'month',
+        forWhom: 'Para escalar varios nichos y países.',
+        highlighted: true,
+        features: [
+          'Hasta 10.000 productos importados',
+          'Scraping diario y re-optimización de fichas',
+          'Hasta 3 tiendas · multi-país',
+          'Analytics de clics y comisiones estimadas',
+        ],
+      },
+      {
+        name: 'Enterprise',
+        priceUsd: 249,
+        period: 'month',
+        forWhom: 'Para operaciones de afiliación a gran escala.',
+        features: [
+          'Productos y scraping ilimitados',
+          'Tiendas ilimitadas con tus propios enlaces de afiliado',
+          'Reportes de comisiones por nicho y país',
+          'Soporte prioritario y mejoras a medida',
+        ],
+      },
+    ],
     includes: [
       'Código fuente completo (Next.js + Supabase + TypeScript)',
       'Motor de importación por API de AliExpress y generación de enlaces de afiliado',
@@ -150,6 +229,60 @@ export const projectAcquisitions: Record<string, ProjectAcquisition> = {
   'ilumax': licenseOffer({
     summary:
       'Tienda inteligente con asistente de IA que vende en lenguaje natural: busca productos, consulta stock, compara precios en dos monedas y agrega al carrito. Incluye panel administrativo, roles y dashboard de KPIs.',
+    // Planes publicados en la landing comercial de AmaxTech: se mantienen
+    // idénticos para no contradecir el precio ya visible al mercado.
+    // Referencia: asistentes IA de venta (Tidio $24-300/mes).
+    plans: [
+      {
+        name: 'Licencia única',
+        priceUsd: 850,
+        period: 'once',
+        forWhom: 'Para operar la tienda en tu propia infraestructura.',
+        features: [
+          'Código fuente completo (Next.js + Supabase + Vercel AI SDK)',
+          'Asistente IA con agent tools sobre tu catálogo',
+          'Panel administrativo con roles y dashboard de KPIs',
+          '12 meses de actualizaciones incluidas',
+        ],
+      },
+      {
+        name: 'Esencial',
+        priceUsd: 80,
+        period: 'month',
+        forWhom: 'Para tiendas que arrancan con IA.',
+        features: [
+          'Hosting gestionado y base de datos incluidos',
+          'Hasta 500 productos',
+          'Asistente IA con 2.000 conversaciones/mes',
+          '1 sucursal',
+        ],
+      },
+      {
+        name: 'Profesional',
+        priceUsd: 110,
+        period: 'month',
+        forWhom: 'Para tiendas en crecimiento con más catálogo.',
+        highlighted: true,
+        features: [
+          'Hasta 5.000 productos',
+          'Asistente IA con 10.000 conversaciones/mes',
+          'Precio dual (USD/BS) y multiusuario con roles',
+          'Integración de pagos y facturación',
+        ],
+      },
+      {
+        name: 'Enterprise',
+        priceUsd: 150,
+        period: 'month',
+        forWhom: 'Para operaciones multi-sede o multi-marca.',
+        features: [
+          'Productos y conversaciones ilimitadas',
+          'Multi-sucursal y multi-moneda',
+          'Modelo de IA a elección (DeepSeek, OpenAI, Claude)',
+          'Soporte prioritario y mejoras a medida',
+        ],
+      },
+    ],
     includes: [
       'Código fuente completo (Next.js + Supabase + Vercel AI SDK)',
       'Asistente conversacional conectado al catálogo real con agent tools',
@@ -180,6 +313,57 @@ export const projectAcquisitions: Record<string, ProjectAcquisition> = {
   dantojos: licenseOffer({
     summary:
       'Configurador de pedidos por opciones con precio en tiempo real que envía el resumen formateado a tu WhatsApp. Ideal para pastelerías, floristerías, muebles y cualquier negocio de productos personalizables.',
+    // Producto más ligero del catálogo (sin base de datos): precio de entrada
+    // calibrado bajo los constructores de formularios SaaS del mercado.
+    priceFromUsd: 390,
+    plans: [
+      {
+        name: 'Licencia única',
+        priceUsd: 390,
+        period: 'once',
+        forWhom: 'Para tener tu configurador propio sin mensualidades.',
+        features: [
+          'Código fuente completo (React + Tailwind)',
+          'Configurador ilimitado de opciones y precios',
+          'Envío de pedidos formateados a WhatsApp',
+          'Instalación, dominio y 6 meses de ajustes',
+        ],
+      },
+      {
+        name: 'Esencial',
+        priceUsd: 19,
+        period: 'month',
+        forWhom: 'Para pastelerías y talleres que empiezan online.',
+        features: [
+          'Hosting y dominio gestionados',
+          'Hasta 3 categorías de producto',
+          'Cambios de precios y opciones incluidos',
+        ],
+      },
+      {
+        name: 'Profesional',
+        priceUsd: 39,
+        period: 'month',
+        forWhom: 'Para negocios con catálogo y temporadas.',
+        highlighted: true,
+        features: [
+          'Categorías y opciones ilimitadas',
+          'Analytics de pedidos y embudo de WhatsApp',
+          'Campañas de temporada (San Valentín, Navidad)',
+        ],
+      },
+      {
+        name: 'Enterprise',
+        priceUsd: 79,
+        period: 'month',
+        forWhom: 'Para marcas con varias sucursales.',
+        features: [
+          'Multi-sucursal y varias líneas de WhatsApp',
+          'Panel de pedidos y reportes de ventas',
+          'Soporte prioritario',
+        ],
+      },
+    ],
     includes: [
       'Código fuente completo (React + Tailwind)',
       'Configurador paso a paso con opciones y precios',
@@ -351,4 +535,16 @@ export function getPurchasableProjects(): { projectId: string; acquisition: Proj
   return Object.entries(projectAcquisitions)
     .filter(([, acquisition]) => acquisition.kind === 'license')
     .map(([projectId, acquisition]) => ({ projectId, acquisition }))
+}
+
+/** Plan de pago único (licencia) publicado de un sistema, si existe */
+export function getOneTimePlan(acquisition: ProjectAcquisition): AcquisitionPlan | undefined {
+  return acquisition.plans?.find((plan) => plan.period === 'once')
+}
+
+/** Suscripción mensual más económica publicada, si existe */
+export function getEntryMonthlyPlan(acquisition: ProjectAcquisition): AcquisitionPlan | undefined {
+  return acquisition.plans
+    ?.filter((plan) => plan.period === 'month')
+    .sort((a, b) => a.priceUsd - b.priceUsd)[0]
 }
