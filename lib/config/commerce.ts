@@ -18,7 +18,7 @@
 
 /** Moneda única de venta: permite cobrar internacionalmente sin fricción */
 export const COMMERCE_CURRENCY = 'USD'
-
+ 
 /** Precio mínimo de referencia de una licencia (USD). Sobreescribible por entorno */
 const envPriceFrom = Number(process.env.NEXT_PUBLIC_LICENSE_PRICE_FROM_USD)
 export const LICENSE_PRICE_FROM_USD =
