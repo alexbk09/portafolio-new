@@ -130,59 +130,69 @@ function customBuild(config: {
 export const projectAcquisitions: Record<string, ProjectAcquisition> = {
   zonadehobbies: licenseOffer({
     summary:
-      'Plataforma de afiliación AliExpress lista para operar: importa productos por API, arma fichas con scraping y mide cada clic hacia el enlace de afiliado. Se vende como licencia y se instala en tu dominio en cualquier país.',
-    // Planes calibrados con el mercado: AliDropship (licencia $89 pago único) y
-    // plataformas de afiliación SaaS. La cuota mensual cubre hosting, cuotas de
-    // API de AliExpress y la infraestructura de scraping.
-    priceFromUsd: 690,
+      'Plataforma de afiliación AliExpress lista para operar: catálogo importado por API y enriquecido con IA, tienda en 6 idiomas, pSEO de producto, categoría y guía, panel con 28 módulos y auditoría real de indexación en Google Search Console. Se vende como licencia y se instala en tu dominio en cualquier país.',
+    // Calibrado con el mercado 2026: Shopify Advanced (299 USD/mes solo de
+    // e-commerce, sin pSEO, sin multi-idioma nativo ni fiscalidad), Odoo Custom
+    // (13,60 USD/usuario/mes por app) y AliDropship (89 USD pago único, pero solo
+    // importación en WordPress). Reproducir esta plataforma a medida cuesta
+    // 25.000-45.000 USD (700-1.000 h de perfil senior), así que la licencia se
+    // publica por debajo del 12 % de ese coste. La cuota mensual cubre hosting,
+    // cuotas de API de AliExpress, infraestructura de scraping, cuotas de
+    // IndexNow/Search Console y soporte continuo.
+    priceFromUsd: 2900,
     plans: [
       {
         name: 'Licencia única',
-        priceUsd: 690,
+        priceUsd: 2900,
         period: 'once',
-        forWhom: 'Para operar el sistema en tu propio servidor, sin cuotas.',
+        forWhom: 'Para operar el sistema completo en tu propio servidor, sin cuotas mensuales.',
         features: [
           'Código fuente completo y despliegue en tu dominio',
-          'Importación por API AliExpress + motor de scraping',
-          'Tracker de clics y dashboard de comisiones',
-          'Páginas pSEO por producto y categoría',
-          '6 meses de actualizaciones incluidas',
+          'Tienda multi-idioma (6 idiomas) con pSEO de producto, categoría y guía',
+          'Importación por API AliExpress + pipeline de scraping y enriquecido con IA',
+          'Módulo de indexación: IndexNow, Google Indexing API y auditoría en Search Console',
+          'Tracker de clics, analytics de productos y comisiones estimadas',
+          'Panel con 28 módulos y RBAC (roles, permisos por módulo y usuarios)',
+          '12 meses de actualizaciones incluidas',
         ],
       },
       {
         name: 'Esencial',
-        priceUsd: 59,
+        priceUsd: 99,
         period: 'month',
-        forWhom: 'Para lanzar tu primera tienda de nicho.',
+        forWhom: 'Para lanzar tu primera tienda de nicho con catálogo automatizado.',
         features: [
           'Hosting gestionado y cuotas de API incluidas',
           'Hasta 1.000 productos importados',
+          '1 idioma de venta · 1 país',
           'Scraping programado semanal',
-          '1 tienda · 1 país',
+          'Módulo de indexación (IndexNow + sitemap)',
         ],
       },
       {
         name: 'Profesional',
-        priceUsd: 119,
+        priceUsd: 249,
         period: 'month',
-        forWhom: 'Para escalar varios nichos y países.',
+        forWhom: 'Para escalar varios nichos, idiomas y países.',
         highlighted: true,
         features: [
           'Hasta 10.000 productos importados',
-          'Scraping diario y re-optimización de fichas',
-          'Hasta 3 tiendas · multi-país',
-          'Analytics de clics y comisiones estimadas',
+          'Scraping diario, enriquecido con IA y re-optimización de fichas',
+          'Hasta 3 idiomas · multi-país con doble moneda',
+          'Auditoría de indexación en Google Search Console incluida',
+          'Analytics de clics, embudo por categoría y comisiones estimadas',
         ],
       },
       {
         name: 'Enterprise',
-        priceUsd: 249,
+        priceUsd: 590,
         period: 'month',
-        forWhom: 'Para operaciones de afiliación a gran escala.',
+        forWhom: 'Para operaciones de afiliación a gran escala con varios dominios.',
         features: [
-          'Productos y scraping ilimitados',
-          'Tiendas ilimitadas con tus propios enlaces de afiliado',
-          'Reportes de comisiones por nicho y país',
+          'Productos, scraping e idiomas ilimitados',
+          'Tiendas y dominios ilimitados con tus propios enlaces de afiliado',
+          'Módulos de operación (facturación, almacenes, envíos, cuentas por cobrar)',
+          'Reportes de comisiones por nicho, idioma y país',
           'Soporte prioritario y mejoras a medida',
         ],
       },
@@ -190,11 +200,13 @@ export const projectAcquisitions: Record<string, ProjectAcquisition> = {
     includes: [
       'Código fuente completo (Next.js + Supabase + TypeScript)',
       'Motor de importación por API de AliExpress y generación de enlaces de afiliado',
-      'Módulo de scraping que extrae fotos, descripciones y arma fichas con FAQ',
-      'Tracker de clics con producto, categoría, país y dispositivo',
-      'Dashboard de comisiones estimadas y top de productos',
-      'Páginas pSEO indexables por producto y categoría',
-      'Panel administrativo con roles y permisos por usuario',
+      'Pipeline de scraping e IA que extrae fotos, normaliza especificaciones y arma fichas con FAQ',
+      'Tienda multi-idioma (6 idiomas) con hreflang, doble moneda y llms.txt',
+      'pSEO indexable por producto, categoría y guía comparativa',
+      'Módulo de indexación con cola desde sitemap, lotes controlados y auditoría en Google Search Console',
+      'Tracker de clics con producto, categoría, idioma, país y dispositivo',
+      'Dashboard de comisiones estimadas, margen y top de productos',
+      'Panel con 28 módulos y RBAC granular (roles, permisos por módulo y usuarios)',
       'Instalación, dominio, HTTPS y manual de operación',
     ],
   }),
