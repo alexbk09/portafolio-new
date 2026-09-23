@@ -18,7 +18,6 @@ import {
   ExternalLink,
   GraduationCap,
   Layers,
-  ShoppingCart,
   Target,
   TrendingUp,
   User2,
@@ -26,9 +25,6 @@ import {
   Wrench,
 } from 'lucide-react'
 import { projects } from '@/lib/data/projects'
-import { getEntryMonthlyPlan, getOneTimePlan, getProjectAcquisition } from '@/lib/data/licenses'
-import ProjectAcquisitionCard from '@/components/molecules/ProjectAcquisitionCard'
-import { formatUsd } from '@/lib/config/commerce'
 import JsonLd from '@/components/atoms/JsonLd'
 import AiAssistantSection from '@/components/atoms/AiAssistantSection'
 import { buildWhatsAppLink, siteConfig } from '@/lib/data/site'
@@ -37,7 +33,6 @@ import {
   absoluteUrl,
   breadcrumbJsonLd,
   faqPageJsonLd,
-  projectAcquisitionJsonLd,
   PROJECT_ROUTE,
   softwareProjectDetailJsonLd,
   videoObjectJsonLd,
@@ -62,23 +57,10 @@ export async function generateMetadata({
   const project = projects.find((p) => p.id === slug)
   if (!project) return {}
   const url = absoluteUrl(PROJECT_ROUTE(project.id))
-  // Si el sistema tiene licencia pública, el precio entra en la meta description:
-  // es lo que más aumenta el CTR en resultados de búsqueda comerciales.
-  const acquisition = getProjectAcquisition(project.id)
-  const oneTimePlan = acquisition ? getOneTimePlan(acquisition) : undefined
-  const monthlyPlan = acquisition ? getEntryMonthlyPlan(acquisition) : undefined
-  const priceParts = [
-    oneTimePlan ? `licencia desde ${formatUsd(oneTimePlan.priceUsd)} USD` : null,
-    monthlyPlan ? `suscripción desde ${formatUsd(monthlyPlan.priceUsd)} USD/mes` : null,
-  ].filter((part): part is string => part !== null)
-  const priceLabel =
-    priceParts.length > 0
-      ? ` Disponible con ${priceParts.join(' o ')} para cualquier país.`
-      : ''
 
   return {
     title: `${project.title} — Caso de estudio | Desarrollador Full Stack`,
-    description: `${project.description.slice(0, 160)}${priceLabel}`,
+    description: project.description.slice(0, 160),
     alternates: { canonical: url },
     openGraph: {
       title: `${project.title} — Sistema construido por Keiber Paez`,
@@ -107,11 +89,8 @@ export async function generateMetadata({
 }
 
 function ProjectDetailPage({ project }: { project: Project }) {
-  const whatsappMessage = `Hola Keiber, vi tu sistema "${project.title}" y me gustaría información para implementar algo similar.`
+  const whatsappMessage = `Hola Keiber, vi el proyecto "${project.title}" y me gustaría conversar sobre una oportunidad de trabajo o colaboración.`
   const whatsappUrl = buildWhatsAppLink(siteConfig.whatsapp.phone, whatsappMessage)
-
-  // Condiciones comerciales publicadas: licencia propia o desarrollo a medida
-  const acquisition = getProjectAcquisition(project.id)
 
   return (
     <article className={`project-detail ${project.accent}`}>
@@ -133,14 +112,6 @@ function ProjectDetailPage({ project }: { project: Project }) {
           {project.isOpenSource ? <Code2 size={11} /> : <Building2 size={11} />}
           {project.isOpenSource ? ' Código abierto' : ' Sistema privado'}
         </p>
-        {acquisition && (
-          <span className={`detail-acquisition-badge ${acquisition.kind}`}>
-            <ShoppingCart size={11} />
-            {acquisition.kind === 'license'
-              ? ' Licencia o SaaS · Entrega en cualquier país'
-              : ' Se construye a medida · Entrega en cualquier país'}
-          </span>
-        )}
         <h1>{project.title}</h1>
         <div className="detail-meta">
           <span><User2 size={12} /> {project.role}</span>
@@ -245,22 +216,9 @@ function ProjectDetailPage({ project }: { project: Project }) {
             <p>{improvement.description}</p>
           </div>
         ))}
-        {acquisition && (
-          <>
-            <h3>{`¿Se puede comprar ${project.title}?`}</h3>
-            <p>{acquisition.summary}</p>
-            <h3>{`¿En qué países puedo adquirir ${project.title}?`}</h3>
-            <p>
-              {`En cualquier país: ${acquisition.coverage}. La entrega y el soporte son 100% remotos, con respuesta en menos de 24 horas.`}
-            </p>
-          </>
-        )}
       </section>
 
-      {/* Oferta comercial: licencia propia o desarrollo a medida */}
-      {acquisition && <ProjectAcquisitionCard project={project} acquisition={acquisition} />}
-
-      {/* CTAs de conversión */}
+      {/* CTAs orientados a conversación profesional */}
       <div className="detail-actions">
         {project.url && (
           <a
@@ -296,7 +254,7 @@ function ProjectDetailPage({ project }: { project: Project }) {
           </a>
         )}
         <a href="/#contact" className="button button-ghost">
-          Contratar algo similar <ExternalLink size={14} />
+          Hablar sobre esta solución <ExternalLink size={14} />
         </a>
         <a
           href={whatsappUrl}
@@ -305,7 +263,7 @@ function ProjectDetailPage({ project }: { project: Project }) {
           className="button button-whatsapp"
           aria-label={`Consultar por WhatsApp sobre ${project.title}`}
         >
-          <WhatsAppIcon size={14} /> Consultar por WhatsApp
+          <WhatsAppIcon size={14} /> Conversar por WhatsApp
         </a>
       </div>
 
@@ -324,7 +282,6 @@ function ProjectDetailPage({ project }: { project: Project }) {
 
       {/* Schemas estructurados del caso de estudio */}
       <JsonLd data={softwareProjectDetailJsonLd(project)} />
-      {acquisition && <JsonLd data={projectAcquisitionJsonLd(project, acquisition)} />}
       <JsonLd data={faqPageJsonLd(project)} />
       {videoObjectJsonLd(project) && <JsonLd data={videoObjectJsonLd(project) as Record<string, unknown>} />}
       <JsonLd

@@ -13,9 +13,9 @@ export default function HireMeSection() {
     <section id="hire" className="hire-section section-shell">
       <Reveal>
         <SectionLabel
-          eyebrow="Reclutadores y empleadores"
-          title="Ideal para tu equipo remoto."
-          copy="Si buscas un Senior Full Stack o Technical Lead que desde el primer mes entregue en producción, sin ramp-up de 6 meses y con estándares de calidad que protegen tu inversión, este espacio es para ti."
+          eyebrow="Reclutadores y equipos tech"
+          title="Busco un equipo donde construir software serio."
+          copy="Estoy buscando una oportunidad senior donde pueda aportar arquitectura, ejecución y producto con criterio real. No busco vender un paquete: busco un equipo con visión, disciplina y ganas de construir en serio."
         />
       </Reveal>
 
@@ -53,7 +53,7 @@ export default function HireMeSection() {
           </p>
           <p className="hire-actions">
             <a href="#contact" className="button button-primary">
-              Invitarme a tu proceso <ArrowUpRight size={14} />
+              Hablar de una oportunidad <ArrowUpRight size={14} />
             </a>
             <a href="/cv.pdf" download className="text-link">
               Descargar CV PDF

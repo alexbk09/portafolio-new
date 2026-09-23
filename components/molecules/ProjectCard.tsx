@@ -3,12 +3,11 @@
  */
 'use client'
 
-import { ArrowUpRight, Code2, Eye, ShoppingCart } from 'lucide-react'
+import { ArrowUpRight, Code2, Eye } from 'lucide-react'
 import Link from 'next/link'
 import type { Project } from '@/lib/types/portfolio'
 import ProjectVisual from '@/components/molecules/ProjectVisual'
 import { PROJECT_ROUTE } from '@/lib/config/seo'
-import { getProjectAcquisition } from '@/lib/data/licenses'
 
 interface ProjectCardProps {
   /** Proyecto a mostrar */
@@ -20,8 +19,6 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index, onOpenDetails }: ProjectCardProps) {
-  // Condiciones comerciales del sistema: licencia propia o desarrollo a medida
-  const acquisition = getProjectAcquisition(project.id)
   return (
     <article className={`project-card ${project.accent}`}>
       {/* Visual superior: imagen real con fallback elegante */}
@@ -33,12 +30,6 @@ export default function ProjectCard({ project, index, onOpenDetails }: ProjectCa
           <span className="eyebrow">Proyecto</span>
           <span className="project-arrow">↗</span>
         </div>
-        {acquisition && (
-          <span className={`project-license-badge ${acquisition.kind}`}>
-            <ShoppingCart size={10} />
-            {acquisition.kind === 'license' ? 'Licencia o SaaS · Global' : 'Construible a medida'}
-          </span>
-        )}
         <h3>{project.title}</h3>
         <p>{project.description}</p>
 

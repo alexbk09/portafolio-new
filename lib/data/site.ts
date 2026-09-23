@@ -12,16 +12,16 @@ export const siteConfig = {
   /** Propuesta de valor principal (H1 del hero) */
   headline: 'Senior Full Stack Developer',
   /** Propuesta de valor secundaria (stack + sectores) */
-  headlineAccent: 'Laravel · Node.js · React · Vue',
+  headlineAccent: 'Arquitectura · Backend · Frontend · Product Engineering',
   /** Descripción corta para SEO y hero */
-  bio: 'Soy Keiber Alexander Paez Hernández, Ingeniero de Software y Senior Full Stack Developer con más de 7 años convirtiendo requisitos complejos en software rápido, confiable y humano. Trabajo con PHP/Laravel, Node.js, React y Vue.js.',
-  /** Frase corta de posicionamiento orientada a negocios */
+  bio: 'Senior Full Stack Developer con 7+ años construyendo plataformas web, APIs y sistemas de negocio para equipos que necesitan software serio, mantenible y listo para crecer con el producto.',
+  /** Frase corta de posicionamiento orientada a perfil profesional */
   positioning:
-    'Construyo sistemas que generan dinero o ahorran tiempo a negocios reales: e-commerce con doble moneda, clínicas sin citas perdidas, facturación electrónica sin rechazos.',
+    'Construyo productos, APIs y experiencias web con Laravel, Node.js, React y Vue para empresas que necesitan velocidad, claridad arquitectónica y ejecución confiable en producción.',
   /** Estado de disponibilidad */
-  availability: 'Disponible · Remoto Global · Respuesta < 24h',
+  availability: 'Disponible para roles Senior Full Stack / Backend / Tech Lead',
   /** Personas a las que está abierto (contratación) */
-  openTo: 'Empleo remoto (Senior Full Stack / Tech Lead) · Proyectos freelance B2B · Consultoría',
+  openTo: 'Remoto · híbrido · presencial · equipos de producto con visión de crecimiento',
   /** Métricas destacadas del hero */
   metrics: [
     { value: '7+', label: 'años de experiencia' },
@@ -46,7 +46,7 @@ export const siteConfig = {
     /** Número con código de país en formato internacional */
     phone: '+584122649707',
     /** Mensaje por defecto para el botón flotante */
-    defaultMessage: 'Hola Keiber, vi tu portafolio y me gustaría conversar contigo sobre una oportunidad.',
+    defaultMessage: 'Hola Keiber, vi tu perfil y me gustaría conversar sobre una oportunidad senior para mi equipo.',
   },
 } as const
 

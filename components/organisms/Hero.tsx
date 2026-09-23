@@ -20,7 +20,8 @@ export default function Hero() {
         <Reveal delay={0.06}>
           <p className="hero-kicker">{siteConfig.title}</p>
           <h1>
-            Software que <span className="hero-accent">genera dinero</span> o ahorra tiempo a tu negocio
+            Software que <span className="hero-accent">se mantiene</span> en producción, <span className="hero-accent">escala</span>{' '}
+            con el negocio y gana la confianza del equipo.
           </h1>
         </Reveal>
         <Reveal delay={0.14}>
@@ -39,13 +40,13 @@ export default function Hero() {
 
         <Reveal delay={0.26} className="hero-actions">
           <a href="#contact" className="button button-primary">
-            Iniciar una conversación <ArrowUpRight size={17} />
+            Hablemos de tu equipo <ArrowUpRight size={17} />
           </a>
           <a href="#work" className="text-link">
-            Ver sistemas en producción <ArrowDown size={14} />
+            Ver proyectos <ArrowDown size={14} />
           </a>
           <a href="#hire" className="text-link hero-hire-link">
-            ¿Buscas talento Senior remoto? <span>↓</span>
+            Perfil Senior / Tech Lead <span>↓</span>
           </a>
         </Reveal>
       </div>
@@ -74,7 +75,7 @@ export default function Hero() {
           </pre>
           <div className="code-footer">
             <span>
-              <span className="status-dot" /> disponible para B2B y empleo remoto
+              <span className="status-dot" /> disponible para empleo remoto
             </span>
             <span>2026</span>
           </div>

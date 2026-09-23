@@ -18,7 +18,7 @@ import ContactSection from '@/components/organisms/ContactSection'
 import JsonLd from '@/components/atoms/JsonLd'
 import { projects } from '@/lib/data/projects'
 import { siteConfig } from '@/lib/data/site'
-import { softwareProjectsJsonLd, purchasableProductsJsonLd, SITE_URL, breadcrumbJsonLd } from '@/lib/config/seo'
+import { softwareProjectsJsonLd, SITE_URL, breadcrumbJsonLd } from '@/lib/config/seo'
 
 /* Metadata específica de la home. El layout raíz aporta el resto (OG/Twitter global). */
 export const metadata: Metadata = {
@@ -50,7 +50,7 @@ export default function Home() {
       {/* Resultados medibles entregados a clientes */}
       <ImpactSection />
 
-      {/* Servicios profesionales (freelance / B2B) */}
+      {/* Especialidades del desarrollador */}
       <ServicesSection />
 
       {/* Oferta para reclutadores y empleadores remotos */}
@@ -66,12 +66,11 @@ export default function Home() {
       <section className="section-shell content-section include-cta" aria-label="Ver todos los proyectos">
         <div className="download-panel">
           <div>
-            <p className="eyebrow">Casos de estudio indexables</p>
-            <h2 className="include-title">Cada sistema con su página de caso</h2>
+            <p className="eyebrow">Casos de estudio</p>
+            <h2 className="include-title">Decisiones técnicas, impacto real y ejecución sólida.</h2>
             <p className="section-copy">
-              Explora el problema, la solución, el stack y los resultados medibles de cada sistema
-              en una página dedicada, pensada para reclutadores, clientes y buscadores. Los sistemas
-            propios también se venden como licencia, con entrega y soporte en cualquier país.
+              Cada proyecto cuenta con contexto, solución, stack y resultados medibles para mostrar
+              cómo trabajo con requisitos complejos, entregas reales y productos pensados para crecer.
             </p>
           </div>
           <Link href="/proyectos" className="button button-primary include-cta-button">
@@ -91,7 +90,6 @@ export default function Home() {
 
       {/* Datos estructurados: lista de software construido + breadcrumb */}
       <JsonLd data={softwareProjectsJsonLd(projects)} />
-      <JsonLd data={purchasableProductsJsonLd(projects)} />
       <JsonLd data={breadcrumbJsonLd([{ name: 'Inicio', path: '/' }])} />
     </main>
   )

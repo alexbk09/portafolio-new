@@ -11,8 +11,8 @@ export default function ExperienceSection() {
       <Reveal>
         <SectionLabel
           eyebrow="02 / Experiencia"
-          title="Construido desde los cimientos."
-          copy="Más de siete años construyendo desde los cimientos: de sistemas ERP y plataformas logísticas a arquitecturas de alto tráfico, equipos remotos y productos digitales completos."
+          title="Software hecho con criterio, no con ruido."
+          copy="Más de siete años construyendo sistemas empresariales, plataformas de negocio y productos web con enfoque en estabilidad, arquitectura y entrega real para equipos que necesitan mover rápido sin romper nada."
         />
       </Reveal>
 

@@ -16,7 +16,7 @@ export default function SiteHeader() {
         <span className="brand-mark">/</span> {siteConfig.brand}
       </a>
       <nav className={menuOpen ? 'site-nav is-open' : 'site-nav'} aria-label="Navegación principal">
-        <a href="/#services" onClick={() => setMenuOpen(false)}>Servicios</a>
+        <a href="/#services" onClick={() => setMenuOpen(false)}>Especialidades</a>
         <a href="/#hire" onClick={() => setMenuOpen(false)}>Empleo</a>
         <a href="/#work" onClick={() => setMenuOpen(false)}>Proyectos</a>
         <a href="/#experience" onClick={() => setMenuOpen(false)}>Experiencia</a>
